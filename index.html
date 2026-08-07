@@ -1,223 +1,134 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>mari meow..</title>
+<title>hi im mari... !!</title>
 
-  <!-- Cute pixel font yo! -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+<style>
+body {
+  background: #fff5fb;
+  font-family: "Arial", sans-serif;
+  color: #4a354d;
+}
 
-  <style>
-    :root{
-      --bg:#ffd9f2;
-      --bg2:#ffe8f7;
-      --card:#fff0fa;
-      --pink:#ff78c8;
-      --pink2:#ff9ed8;
-      --text:#5b2b52;
-      --shadow:#ffb6e1;
-    }
+.cat-card {
+  background: #ffffff;
+  border: 3px solid #e8b7dc;
+  border-radius: 25px;
+  width: 420px;
+  margin: 80px auto;
+  padding: 30px;
+  text-align: center;
+  box-shadow: 0 8px 25px rgba(200, 150, 200, 0.25);
+  position: relative;
+}
 
-    *{box-sizing:border-box}
+.ears span {
+  position: absolute;
+  top: -25px;
+  width: 55px;
+  height: 55px;
+  background: #ffffff;
+  border: 3px solid #e8b7dc;
+  transform: rotate(45deg);
+  border-radius: 10px;
+}
 
-    body{
-      margin:0;
-      min-height:100vh;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      background:
-        radial-gradient(circle at 20% 20%, #ffffff88 0 8px, transparent 9px),
-        radial-gradient(circle at 80% 30%, #ffffff66 0 6px, transparent 7px),
-        radial-gradient(circle at 40% 80%, #ffffff66 0 10px, transparent 11px),
-        linear-gradient(180deg,var(--bg),var(--bg2));
-      font-family:"Press Start 2P", system-ui;
-      color:var(--text);
-      overflow:hidden;
-      cursor:url("https://cur.cursors-4u.net/cursors/cur-2/cur117.cur"), auto;
-    }
+.ears span:first-child {
+  left: 55px;
+}
 
-    a, button{
-      cursor:url("https://cur.cursors-4u.net/cursors/cur-2/cur116.cur"), pointer;
-    }
+.ears span:last-child {
+  right: 55px;
+}
 
-    .sparkle{
-      position:fixed;
-      width:10px;
-      height:10px;
-      pointer-events:none;
-      background:white;
-      border-radius:50%;
-      box-shadow:0 0 10px white;
-      animation:fade 700ms linear forwards;
-      z-index:9999;
-    }
+h1 {
+  margin-top: 20px;
+}
 
-    @keyframes fade{
-      to{
-        transform:translateY(-12px) scale(0);
-        opacity:0;
-      }
-    }
+h1::before {
+  content: "ฅ^•ﻌ•^ฅ ";
+}
 
-    .card{
-      width:min(92vw,560px);
-      background:var(--card);
-      border:4px solid var(--pink);
-      border-radius:24px;
-      padding:28px;
-      text-align:center;
-      box-shadow:0 12px 0 var(--shadow);
-      position:relative;
-    }
+h1::after {
+  content: " ฅ^•ﻌ•^ฅ";
+}
 
-    .windowbar{
-      position:absolute;
-      inset:0 0 auto 0;
-      height:32px;
-      background:linear-gradient(90deg,var(--pink),var(--pink2));
-      border-radius:20px 20px 0 0;
-      border-bottom:3px solid #ff5db7;
-    }
+.dni {
+  background: #fff0fa;
+  border: 2px dashed #dba3d0;
+  border-radius: 15px;
+  padding: 12px;
+  margin: 20px 0;
+  font-size: 14px;
+}
 
-    .dots{
-      display:flex;
-      gap:8px;
-      padding:8px 12px;
-    }
+.discord {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 4px solid #e8b7dc;
+  margin: 15px;
+}
 
-    .dot{
-      width:12px;
-      height:12px;
-      border-radius:50%;
-      background:#fff;
-      border:2px solid #ff5db7;
-    }
+.buttons {
+  margin-top: 10px;
+}
 
-    h1{
-      margin:44px 0 10px;
-      font-size:24px;
-      color:#ff4fb4;
-      text-shadow:2px 2px #fff;
-    }
+.btn {
+  display: inline-block;
+  background: #e8b7dc;
+  color: white;
+  padding: 12px 25px;
+  border-radius: 20px;
+  text-decoration: none;
+  transition: 0.2s;
+}
 
-    p{
-      font-size:11px;
-      line-height:1.8;
-      margin:0 0 18px;
-    }
+.btn:hover {
+  background: #d28ac4;
+  transform: translateY(-3px);
+}
 
-    .discord{
-      width:200px;
-      max-width:70vw;
-      border-radius:18px;
-      border:4px solid var(--pink);
-      box-shadow:0 8px 0 var(--shadow);
-      image-rendering:auto;
-      margin:10px auto 20px;
-      display:block;
-    }
+.footer {
+  margin-top: 25px;
+  font-size: 13px;
+  opacity: 0.7;
+}
+</style>
 
-    .buttons{
-      display:flex;
-      gap:12px;
-      justify-content:center;
-      flex-wrap:wrap;
-      margin-top:8px;
-    }
-
-    .btn{
-      text-decoration:none;
-      color:var(--text);
-      background:white;
-      border:3px solid var(--pink);
-      border-radius:14px;
-      padding:12px 16px;
-      font-size:10px;
-      box-shadow:0 4px 0 var(--shadow);
-      transition:transform .08s ease;
-    }
-
-    .btn:hover{ transform:translateY(-2px); }
-    .btn:active{
-      transform:translateY(2px);
-      box-shadow:0 2px 0 var(--shadow);
-    }
-
-    .footer{
-      margin-top:18px;
-      font-size:9px;
-      opacity:.8;
-    }
-
-    .heart{
-      position:fixed;
-      font-size:18px;
-      opacity:.18;
-      animation:float 10s linear infinite;
-      user-select:none;
-    }
-
-    @keyframes float{
-      from{ transform:translateY(110vh) rotate(0deg); }
-      to{ transform:translateY(-20vh) rotate(360deg); }
-    }
-      .dni {
-    background: #ffd6ea;
-    border: 2px dashed #ff8fc7;
-    border-radius: 12px;
-    padding: 10px;
-    margin: 15px auto;
-    max-width: 400px;
-    color: #8a3d65;
-    font-family: inherit;
-  }
-  </style>
 </head>
+
 <body>
-  <div class="heart" style="left:10%; animation-delay:0s;">❤</div>
-  <div class="heart" style="left:30%; animation-delay:2s;">❤</div>
-  <div class="heart" style="left:55%; animation-delay:4s;">❤</div>
-  <div class="heart" style="left:80%; animation-delay:1s;">❤</div>
 
-  <main class="card">
-    <div class="windowbar">
-      <div class="dots">
-        <span class="dot"></span>
-        <span class="dot"></span>
-        <span class="dot"></span>
-      </div>
-    </div>
+<div class="cat-card">
 
-  <h1>hi im mari... !! ✿✿</h1>
-    
-    <div class="dni">
+  <div class="ears">
+    <span></span>
+    <span></span>
+  </div>
+
+  <h1>hi im mari... !!</h1>
+
+  <p>made by mari ✿ (obviously lol..)</p>
+
+  <div class="dni">
     <b>dni:</b> basic dni criteria, boundary breakers, yumeshippers, 20+ y.o.
-    </div>
-    
-    <img src="discord.png" alt="My Discord profile" class="discord">
+  </div>
 
-    <div class="buttons">
-      <a class="btn" href="https://www.roblox.com/users/1644195832/profile" target="_blank">my roblox!!</a>
-    </div>
+  <img src="discord.png" alt="My Discord profile" class="discord">
 
-    <div class="footer">
-      best viewed with a computer.. <.< ✧
-    </div>
-  </main>
+  <div class="buttons">
+    <a class="btn" href="https://www.roblox.com/users/1644195832/profile" target="_blank">
+      my roblox!! 🐾
+    </a>
+  </div>
 
-  <script>
-    document.addEventListener('mousemove', (e) => {
-      const s = document.createElement('div');
-      s.className = 'sparkle';
-      s.style.left = e.pageX + 'px';
-      s.style.top = e.pageY + 'px';
-      document.body.appendChild(s);
-      setTimeout(() => s.remove(), 700);
-    });
-  </script>
+  <div class="footer">
+    best viewed with a computer.. <.< ✧ 🐈
+  </div>
+
+</div>
+
 </body>
 </html>
