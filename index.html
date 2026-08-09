@@ -637,5 +637,231 @@ const supabaseClient = window.supabase.createClient(
   await loadMessages();
 })();
 </script>
+
+<audio id="bg-music" loop>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<button id="audio-toggle" class="audio-toggle" title="toggle music">🔇</button>
+
+
+<div id="clock-widget" class="clock-widget">00:00:00</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const music = document.getElementById("bg-music");
+  const audioToggle = document.getElementById("audio-toggle");
+
+  let musicOn = localStorage.getItem("musicOn") === "true";
+
+  function updateMusicButton() {
+    audioToggle.textContent = musicOn ? "🔊" : "🔇";
+  }
+
+  audioToggle.addEventListener("click", async () => {
+    if (music.paused) {
+      try {
+        await music.play();
+        musicOn = true;
+      } catch (err) {
+        console.log("Audio could not start:", err);
+        musicOn = false;
+      }
+    } else {
+      music.pause();
+      musicOn = false;
+    }
+
+    localStorage.setItem("musicOn", musicOn);
+    updateMusicButton();
+  });
+
+  updateMusicButton();
+  const clock = document.getElementById("clock-widget");
+
+  function updateClock() {
+    const now = new Date();
+
+    const h = String(now.getHours()).padStart(2, "0");
+    const m = String(now.getMinutes()).padStart(2, "0");
+    const s = String(now.getSeconds()).padStart(2, "0");
+
+    clock.textContent = `${h}:${m}:${s}`;
+  }
+
+  updateClock();
+  setInterval(updateClock, 1000);
+  const text = "mari's little corner";
+  const twText = document.getElementById("tw-text");
+
+  let typeIndex = 0;
+
+  function typeWriter() {
+    if (typeIndex < text.length) {
+      twText.textContent += text[typeIndex];
+      typeIndex++;
+      setTimeout(typeWriter, 80);
+    }
+  }
+
+  typeWriter();
+  const counter = document.getElementById("visit-counter");
+
+  let visits = Number(localStorage.getItem("visits") || 0);
+  visits++;
+
+  localStorage.setItem("visits", visits);
+
+  counter.textContent = String(visits).padStart(6, "0");
+
+  const gbForm = document.getElementById("gb-form");
+  const gbName = document.getElementById("gb-name");
+  const gbMsg = document.getElementById("gb-msg");
+  const gbEntries = document.getElementById("gb-entries");
+
+  let entries = JSON.parse(localStorage.getItem("guestbook") || "[]");
+
+  function renderGuestbook() {
+    gbEntries.innerHTML = "";
+
+    entries.forEach(entry => {
+      const div = document.createElement("div");
+      div.className = "gb-entry";
+
+      const name = document.createElement("b");
+      name.textContent = entry.name;
+
+      const msg = document.createElement("div");
+      msg.textContent = entry.message;
+
+      const time = document.createElement("span");
+      time.className = "gb-time";
+      time.textContent = entry.time;
+
+      div.appendChild(name);
+      div.appendChild(msg);
+      div.appendChild(time);
+
+      gbEntries.appendChild(div);
+    });
+  }
+
+  gbForm.addEventListener("submit", e => {
+    e.preventDefault();
+
+    const name = gbName.value.trim();
+    const message = gbMsg.value.trim();
+
+    if (!name || !message) return;
+
+    entries.unshift({
+      name: name,
+      message: message,
+      time: new Date().toLocaleString()
+    });
+
+    entries = entries.slice(0, 50);
+
+    localStorage.setItem("guestbook", JSON.stringify(entries));
+
+    gbForm.reset();
+    renderGuestbook();
+  });
+
+  renderGuestbook();
+
+  const konami = [
+    "ArrowUp",
+    "ArrowUp",
+    "ArrowDown",
+    "ArrowDown",
+    "ArrowLeft",
+    "ArrowRight",
+    "ArrowLeft",
+    "ArrowRight",
+    "b",
+    "a"
+  ];
+
+  let konamiIndex = 0;
+
+  document.addEventListener("keydown", e => {
+    if (e.key === konami[konamiIndex]) {
+      konamiIndex++;
+
+      if (konamiIndex === konami.length) {
+        activateKonami();
+        konamiIndex = 0;
+      }
+    } else {
+      konamiIndex = 0;
+    }
+  });
+
+  function activateKonami() {
+    const overlay = document.createElement("div");
+    overlay.className = "konami-overlay";
+
+    const msg = document.createElement("div");
+    msg.className = "konami-msg";
+    msg.innerHTML = `
+      <div style="font-size:28px">🐱</div>
+      <b>KONAMI CODE ACTIVATED</b><br>
+      u found the secret thing
+    `;
+
+    overlay.appendChild(msg);
+    document.body.appendChild(overlay);
+
+    for (let i = 0; i < 25; i++) {
+      const cat = document.createElement("div");
+
+      cat.className = "konami-cat";
+      cat.textContent = ["🐱", "🐾", "ฅ^•ﻌ•^ฅ"][Math.floor(Math.random() * 3)];
+
+      cat.style.left = Math.random() * 100 + "vw";
+      cat.style.animationDuration = (2 + Math.random() * 4) + "s";
+      cat.style.fontSize = (14 + Math.random() * 20) + "px";
+
+      document.body.appendChild(cat);
+
+      setTimeout(() => cat.remove(), 7000);
+    }
+
+    setTimeout(() => overlay.remove(), 3000);
+  }
+
+  document.addEventListener("click", e => {
+    const sparkle = document.createElement("div");
+
+    sparkle.className = "sparkle";
+    sparkle.textContent = "✦";
+
+    sparkle.style.left = e.clientX + "px";
+    sparkle.style.top = e.clientY + "px";
+
+    document.body.appendChild(sparkle);
+
+    setTimeout(() => sparkle.remove(), 700);
+  });
+
+  const floatSymbols = ["🐾", "♡", "✧", "⋆", "🐱"];
+
+  for (let i = 0; i < 8; i++) {
+    const el = document.createElement("div");
+
+    el.className = "float";
+    el.textContent =
+      floatSymbols[Math.floor(Math.random() * floatSymbols.length)];
+
+    el.style.left = Math.random() * 100 + "vw";
+    el.style.animationDelay = -(Math.random() * 10) + "s";
+    el.style.animationDuration = (8 + Math.random() * 8) + "s";
+
+    document.body.appendChild(el);
+  }
+
+});
+</script>
 </body>
 </html>
