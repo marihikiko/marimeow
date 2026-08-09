@@ -421,7 +421,7 @@
   </div>
 
   <button id="audio-toggle" class="audio-toggle" title="toggle music" aria-label="toggle background music">🔇</button>
-  <div id="clock-widget" class="clock-widget">🕐 --:--:--</div>
+  <div id="clock-widget" class="clock-widget">--:--:--</div>
   <audio id="bg-music" loop>
     <source src="music.mp3" type="audio/mpeg">
   </audio>
@@ -521,7 +521,7 @@ function updateClock() {
   const m = String(now.getMinutes()).padStart(2, "0");
   const s = String(now.getSeconds()).padStart(2, "0");
 
-  clock.textContent = `🕐 ${h}:${m}:${s}`;
+  clock.textContent = `${h}:${m}:${s}`;
 }
 
 updateClock();
