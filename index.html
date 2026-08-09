@@ -681,35 +681,41 @@ for (let i = 0; i < 8; i++) {
 
     const counterEl = document.getElementById("visit-counter");
 
-   async function handleVisitorCounter() {
+  async function handleVisitorCounter() {
     if (!counterEl) return;
-  
-    try {
-      const { data, error } = await supabaseClient
-        .from("visitors")
-        .select("count")
-        .eq("id", 1)
-        .single();
-  
-      if (error) throw error;
-  
-      const currentCount = data?.count || 0;
-      const newCount = currentCount + 1;
-  
+
+  try {
+    const alreadyVisited = localStorage.getItem("hasVisited");
+
+    const { data, error } = await supabaseClient
+      .from("visitors")
+      .select("count")
+      .eq("id", 1)
+      .single();
+
+    if (error) throw error;
+
+    let currentCount = data?.count || 0;
+
+    if (!alreadyVisited) {
+      currentCount++;
+
       const { error: updateErr } = await supabaseClient
         .from("visitors")
-        .update({ count: newCount })
+        .update({ count: currentCount })
         .eq("id", 1);
-  
+
       if (updateErr) throw updateErr;
-  
-      counterEl.textContent = String(newCount).padStart(6, "0");
-  
-    } catch (e) {
-      console.error("Counter error:", e);
-      counterEl.textContent = "000000";
+
+      localStorage.setItem("hasVisited", "true");
     }
-  }  
+
+    counterEl.textContent = String(currentCount).padStart(6, "0");
+
+  } catch (e) {
+    console.error("Counter error:", e);
+  }
+}
     
     await handleVisitorCounter();
 
