@@ -769,6 +769,61 @@ for (let i = 0; i < 8; i++) {
         </div>
       `).join("");
     }
+    const blockedWords = [
+  "nigger",
+  "nigga",
+  "nigg",
+  "coon",
+  "spic",
+  "spick",
+  "wetback",
+  "chink",
+  "gook",
+  "kike",
+  "paki",
+  "sandnigger",
+  "raghead",
+  "faggot",
+  "fag",
+  "dyke",
+  "tranny",
+  "shemale",
+  "homo",
+  "retard",
+  "retarded",
+  "spaz",
+  "cunt",
+  "bitch",
+  "whore",
+  "slut",
+  "skank",
+  "cracker",
+  "honky",
+  "beaner",
+  "jap",
+  "kraut",
+  "redskin",
+  "abo",
+  "wop",
+  "dago",
+  "polack"
+];
+    
+function containsBlockedWord(text) {
+  const normalized = text
+    .toLowerCase()
+    .normalize("NFKD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9]/g, "");
+
+  return blockedWords.some(word => {
+    const normalizedWord = word
+      .toLowerCase()
+      .replace(/[^a-z0-9]/g, "");
+
+    return normalized.includes(normalizedWord);
+  });
+}
 
     form.addEventListener("submit", async e => {
 
@@ -778,7 +833,11 @@ for (let i = 0; i < 8; i++) {
       const message = msgEl.value.trim();
 
       if (!name || !message) return;
-
+      
+      if (containsBlockedWord(name) || containsBlockedWord(message)) {
+      alert("please keep the guestbook respectful");
+      return;
+      }
       const { error } = await supabaseClient
         .from("guestbook")
         .insert([
