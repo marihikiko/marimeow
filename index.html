@@ -523,11 +523,11 @@
       <span style="font-size:7px; opacity:.7;">psst.. try the konami code</span>
     </div>
   </main>
-  
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<!-- Supabase -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
-// ==== boring supabase conf :sob: ====
 const SUPABASE_URL = 'https://jyjvqbpnpnbxrkprrgli.supabase.co';
 const SUPABASE_ANON_KEY = 'sb_publishable_xdSbkUjSGPnEgUdSh7GM5g_1xqEDmAg';
 
@@ -536,122 +536,10 @@ const supabaseClient = window.supabase.createClient(
   SUPABASE_ANON_KEY
 );
 
-// ---- visitor counter (shared for everyone) ----
-(async function () {
-  const el = document.getElementById('visit-counter');
+const music = document.getElementById("bg-music");
+const audioToggle = document.getElementById("audio-toggle");
 
-  try {
-    const VISIT_KEY = 'mari-visited';
-
-    if (!localStorage.getItem(VISIT_KEY)) {
-      const { data } = await supabaseClient
-        .from('visitors')
-        .select('count')
-        .eq('id', 1)
-        .single();
-
-      const current = data?.count || 0;
-
-      await supabaseClient
-        .from('visitors')
-        .update({ count: current + 1 })
-        .eq('id', 1);
-
-      localStorage.setItem(VISIT_KEY, 'yes');
-    }
-
-    const { data: latest } = await supabaseClient
-      .from('visitors')
-      .select('count')
-      .eq('id', 1)
-      .single();
-
-    el.textContent = String(latest?.count || 0).padStart(6, '0');
-  } catch (err) {
-    console.error('counter error', err);
-    el.textContent = '000000';
-  }
-})();
-
-// ---- guestbook (public shared messages) ----
-(async function () {
-  const form = document.getElementById('gb-form');
-  const nameEl = document.getElementById('gb-name');
-  const msgEl = document.getElementById('gb-msg');
-  const list = document.getElementById('gb-entries');
-
-  function escapeHtml(s) {
-    return s.replace(/[&<>"']/g, c => ({
-      '&':'&amp;',
-      '<':'&lt;',
-      '>':'&gt;',
-      '"':'&quot;',
-      "'":'''
-    })[c]);
-  }
-
-  async function loadMessages() {
-    const { data, error } = await supabaseClient
-      .from('guestbook')
-      .select('*')
-      .order('created_at', { ascending: false });
-
-    if (error || !data || data.length === 0) {
-      list.innerHTML =
-        '<div class="gb-entry">no paw prints yet.. be the first !!</div>';
-      return;
-    }
-
-    list.innerHTML = data.map(en =>
-      '<div class="gb-entry">' +
-      '<b>' + escapeHtml(en.name) + '</b>: ' +
-      escapeHtml(en.message) +
-      '<span class="gb-time">' +
-      new Date(en.created_at).toLocaleDateString() +
-      '</span></div>'
-    ).join('');
-  }
-
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-
-    const name = nameEl.value.trim();
-    const message = msgEl.value.trim();
-
-    if (!name || !message) return;
-
-    const { error } = await supabaseClient
-      .from('guestbook')
-      .insert([{ name, message }]);
-
-    if (!error) {
-      nameEl.value = '';
-      msgEl.value = '';
-      await loadMessages();
-    } else {
-      alert('failed to post message');
-      console.error(error);
-    }
-  });
-
-  await loadMessages();
-})();
-</script>
-
-<audio id="bg-music" loop>
-  <source src="music.mp3" type="audio/mpeg">
-</audio>
-
-<button id="audio-toggle" class="audio-toggle" title="toggle music">🔇</button>
-
-
-<div id="clock-widget" class="clock-widget">00:00:00</div>
-
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  const music = document.getElementById("bg-music");
-  const audioToggle = document.getElementById("audio-toggle");
-
+if (music && audioToggle) {
   let musicOn = localStorage.getItem("musicOn") === "true";
 
   function updateMusicButton() {
@@ -664,7 +552,7 @@ document.addEventListener("DOMContentLoaded", () => {
         await music.play();
         musicOn = true;
       } catch (err) {
-        console.log("Audio could not start:", err);
+        console.error("Audio error:", err);
         musicOn = false;
       }
     } else {
@@ -677,23 +565,29 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   updateMusicButton();
-  const clock = document.getElementById("clock-widget");
+}
 
-  function updateClock() {
-    const now = new Date();
+const clock = document.getElementById("clock-widget");
 
-    const h = String(now.getHours()).padStart(2, "0");
-    const m = String(now.getMinutes()).padStart(2, "0");
-    const s = String(now.getSeconds()).padStart(2, "0");
+function updateClock() {
+  if (!clock) return;
 
-    clock.textContent = `${h}:${m}:${s}`;
-  }
+  const now = new Date();
 
-  updateClock();
-  setInterval(updateClock, 1000);
-  const text = "mari's little corner";
-  const twText = document.getElementById("tw-text");
+  const h = String(now.getHours()).padStart(2, "0");
+  const m = String(now.getMinutes()).padStart(2, "0");
+  const s = String(now.getSeconds()).padStart(2, "0");
 
+  clock.textContent = `${h}:${m}:${s}`;
+}
+
+updateClock();
+setInterval(updateClock, 1000);
+
+const text = "mari's little corner";
+const twText = document.getElementById("tw-text");
+
+if (twText) {
   let typeIndex = 0;
 
   function typeWriter() {
@@ -705,163 +599,291 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   typeWriter();
-  const counter = document.getElementById("visit-counter");
+}
 
-  let visits = Number(localStorage.getItem("visits") || 0);
-  visits++;
+(async function () {
+  const el = document.getElementById("visit-counter");
 
-  localStorage.setItem("visits", visits);
+  if (!el) return;
 
-  counter.textContent = String(visits).padStart(6, "0");
+  try {
+    const VISIT_KEY = "mari-visited";
 
-  const gbForm = document.getElementById("gb-form");
-  const gbName = document.getElementById("gb-name");
-  const gbMsg = document.getElementById("gb-msg");
-  const gbEntries = document.getElementById("gb-entries");
+    if (!localStorage.getItem(VISIT_KEY)) {
 
-  let entries = JSON.parse(localStorage.getItem("guestbook") || "[]");
+      const { data, error } = await supabaseClient
+        .from("visitors")
+        .select("count")
+        .eq("id", 1)
+        .single();
 
-  function renderGuestbook() {
-    gbEntries.innerHTML = "";
+      if (error) throw error;
 
-    entries.forEach(entry => {
-      const div = document.createElement("div");
-      div.className = "gb-entry";
+      const current = data?.count || 0;
 
-      const name = document.createElement("b");
-      name.textContent = entry.name;
+      const { error: updateError } = await supabaseClient
+        .from("visitors")
+        .update({ count: current + 1 })
+        .eq("id", 1);
 
-      const msg = document.createElement("div");
-      msg.textContent = entry.message;
+      if (updateError) throw updateError;
 
-      const time = document.createElement("span");
-      time.className = "gb-time";
-      time.textContent = entry.time;
+      localStorage.setItem(VISIT_KEY, "yes");
+    }
 
-      div.appendChild(name);
-      div.appendChild(msg);
-      div.appendChild(time);
+    const { data: latest, error } = await supabaseClient
+      .from("visitors")
+      .select("count")
+      .eq("id", 1)
+      .single();
 
-      gbEntries.appendChild(div);
-    });
+    if (error) throw error;
+
+    el.textContent = String(latest?.count || 0).padStart(6, "0");
+
+  } catch (err) {
+    console.error("Counter error:", err);
+    el.textContent = "000000";
+  }
+})();
+
+(async function () {
+
+  const form = document.getElementById("gb-form");
+  const nameEl = document.getElementById("gb-name");
+  const msgEl = document.getElementById("gb-msg");
+  const list = document.getElementById("gb-entries");
+
+  if (!form || !nameEl || !msgEl || !list) return;
+
+
+  function escapeHtml(str) {
+    return str.replace(/[&<>"']/g, char => ({
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#039;"
+    })[char]);
   }
 
-  gbForm.addEventListener("submit", e => {
+
+  async function loadMessages() {
+
+    const { data, error } = await supabaseClient
+      .from("guestbook")
+      .select("*")
+      .order("created_at", { ascending: false });
+
+    if (error) {
+      console.error("Guestbook load error:", error);
+
+      list.innerHTML =
+        '<div class="gb-entry">could not load paw prints..</div>';
+
+      return;
+    }
+
+    if (!data || data.length === 0) {
+      list.innerHTML =
+        '<div class="gb-entry">no paw prints yet.. be the first !!</div>';
+
+      return;
+    }
+
+    list.innerHTML = data.map(entry => `
+      <div class="gb-entry">
+        <b>${escapeHtml(entry.name)}</b>: 
+        ${escapeHtml(entry.message)}
+        <span class="gb-time">
+          ${new Date(entry.created_at).toLocaleString()}
+        </span>
+      </div>
+    `).join("");
+  }
+
+
+  form.addEventListener("submit", async e => {
+
     e.preventDefault();
 
-    const name = gbName.value.trim();
-    const message = gbMsg.value.trim();
+    const name = nameEl.value.trim();
+    const message = msgEl.value.trim();
 
     if (!name || !message) return;
 
-    entries.unshift({
-      name: name,
-      message: message,
-      time: new Date().toLocaleString()
-    });
+    const { error } = await supabaseClient
+      .from("guestbook")
+      .insert([
+        {
+          name: name,
+          message: message
+        }
+      ]);
 
-    entries = entries.slice(0, 50);
+    if (error) {
+      console.error("Guestbook insert error:", error);
+      alert("failed to post message");
+      return;
+    }
 
-    localStorage.setItem("guestbook", JSON.stringify(entries));
+    form.reset();
 
-    gbForm.reset();
-    renderGuestbook();
+    await loadMessages();
   });
 
-  renderGuestbook();
 
-  const konami = [
-    "ArrowUp",
-    "ArrowUp",
-    "ArrowDown",
-    "ArrowDown",
-    "ArrowLeft",
-    "ArrowRight",
-    "ArrowLeft",
-    "ArrowRight",
-    "b",
-    "a"
-  ];
+  await loadMessages();
 
-  let konamiIndex = 0;
+})();
 
-  document.addEventListener("keydown", e => {
-    if (e.key === konami[konamiIndex]) {
-      konamiIndex++;
+const konami = [
+  "ArrowUp",
+  "ArrowUp",
+  "ArrowDown",
+  "ArrowDown",
+  "ArrowLeft",
+  "ArrowRight",
+  "ArrowLeft",
+  "ArrowRight",
+  "b",
+  "a"
+];
 
-      if (konamiIndex === konami.length) {
-        activateKonami();
-        konamiIndex = 0;
-      }
-    } else {
+let konamiIndex = 0;
+
+document.addEventListener("keydown", e => {
+
+  if (e.key === konami[konamiIndex]) {
+
+    konamiIndex++;
+
+    if (konamiIndex === konami.length) {
+      activateKonami();
       konamiIndex = 0;
     }
-  });
 
-  function activateKonami() {
-    const overlay = document.createElement("div");
-    overlay.className = "konami-overlay";
-
-    const msg = document.createElement("div");
-    msg.className = "konami-msg";
-    msg.innerHTML = `
-      <div style="font-size:28px">🐱</div>
-      <b>KONAMI CODE ACTIVATED</b><br>
-      u found the secret thing
-    `;
-
-    overlay.appendChild(msg);
-    document.body.appendChild(overlay);
-
-    for (let i = 0; i < 25; i++) {
-      const cat = document.createElement("div");
-
-      cat.className = "konami-cat";
-      cat.textContent = ["🐱", "🐾", "ฅ^•ﻌ•^ฅ"][Math.floor(Math.random() * 3)];
-
-      cat.style.left = Math.random() * 100 + "vw";
-      cat.style.animationDuration = (2 + Math.random() * 4) + "s";
-      cat.style.fontSize = (14 + Math.random() * 20) + "px";
-
-      document.body.appendChild(cat);
-
-      setTimeout(() => cat.remove(), 7000);
-    }
-
-    setTimeout(() => overlay.remove(), 3000);
-  }
-
-  document.addEventListener("click", e => {
-    const sparkle = document.createElement("div");
-
-    sparkle.className = "sparkle";
-    sparkle.textContent = "✦";
-
-    sparkle.style.left = e.clientX + "px";
-    sparkle.style.top = e.clientY + "px";
-
-    document.body.appendChild(sparkle);
-
-    setTimeout(() => sparkle.remove(), 700);
-  });
-
-  const floatSymbols = ["🐾", "♡", "✧", "⋆", "🐱"];
-
-  for (let i = 0; i < 8; i++) {
-    const el = document.createElement("div");
-
-    el.className = "float";
-    el.textContent =
-      floatSymbols[Math.floor(Math.random() * floatSymbols.length)];
-
-    el.style.left = Math.random() * 100 + "vw";
-    el.style.animationDelay = -(Math.random() * 10) + "s";
-    el.style.animationDuration = (8 + Math.random() * 8) + "s";
-
-    document.body.appendChild(el);
+  } else {
+    konamiIndex = 0;
   }
 
 });
+
+
+function activateKonami() {
+
+  const overlay = document.createElement("div");
+  overlay.className = "konami-overlay";
+
+  const msg = document.createElement("div");
+  msg.className = "konami-msg";
+
+  msg.innerHTML = `
+    <div style="font-size:28px">🐱</div>
+    <b>KONAMI CODE ACTIVATED</b><br>
+    u found the secret thing
+  `;
+
+  overlay.appendChild(msg);
+  document.body.appendChild(overlay);
+
+
+  for (let i = 0; i < 25; i++) {
+
+    const cat = document.createElement("div");
+
+    cat.className = "konami-cat";
+
+    cat.textContent = [
+      "🐱",
+      "🐾",
+      "ฅ^•ﻌ•^ฅ"
+    ][Math.floor(Math.random() * 3)];
+
+    cat.style.left = Math.random() * 100 + "vw";
+    cat.style.animationDuration =
+      (2 + Math.random() * 4) + "s";
+
+    cat.style.fontSize =
+      (14 + Math.random() * 20) + "px";
+
+    document.body.appendChild(cat);
+
+    setTimeout(() => cat.remove(), 7000);
+  }
+
+
+  setTimeout(() => {
+    overlay.remove();
+  }, 3000);
+}
+
+document.addEventListener("click", e => {
+
+  const sparkle = document.createElement("div");
+
+  sparkle.className = "sparkle";
+  sparkle.textContent = "✦";
+
+  sparkle.style.left = e.clientX + "px";
+  sparkle.style.top = e.clientY + "px";
+
+  document.body.appendChild(sparkle);
+
+  setTimeout(() => sparkle.remove(), 700);
+});
+
+const floatSymbols = [
+  "🐾",
+  "♡",
+  "✧",
+  "⋆",
+  "🐱"
+];
+
+for (let i = 0; i < 8; i++) {
+
+  const el = document.createElement("div");
+
+  el.className = "float";
+
+  el.textContent =
+    floatSymbols[
+      Math.floor(Math.random() * floatSymbols.length)
+    ];
+
+  el.style.left = Math.random() * 100 + "vw";
+
+  el.style.animationDelay =
+    -(Math.random() * 10) + "s";
+
+  el.style.animationDuration =
+    (8 + Math.random() * 8) + "s";
+
+  document.body.appendChild(el);
+}
 </script>
+
+
+<!-- music -->
+<audio id="bg-music" loop>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<button
+  id="audio-toggle"
+  class="audio-toggle"
+  title="toggle music"
+>
+  🔇
+</button>
+
+
+<!-- clock -->
+<div id="clock-widget" class="clock-widget">
+  00:00:00
+</div>
+
+
 </body>
 </html>
