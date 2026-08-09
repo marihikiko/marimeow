@@ -523,7 +523,12 @@
       <span style="font-size:7px; opacity:.7;">psst.. try the konami code</span>
     </div>
   </main>
-
+  
+<!-- clock -->
+<div id="clock-widget" class="clock-widget">
+  00:00:00
+</div>
+  
 <!-- Supabase -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
@@ -863,27 +868,5 @@ for (let i = 0; i < 8; i++) {
   document.body.appendChild(el);
 }
 </script>
-
-
-<!-- music -->
-<audio id="bg-music" loop>
-  <source src="music.mp3" type="audio/mpeg">
-</audio>
-
-<button
-  id="audio-toggle"
-  class="audio-toggle"
-  title="toggle music"
->
-  🔇
-</button>
-
-
-<!-- clock -->
-<div id="clock-widget" class="clock-widget">
-  00:00:00
-</div>
-
-
 </body>
 </html>
