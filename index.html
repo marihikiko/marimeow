@@ -827,7 +827,7 @@
 
 
 
-  <section class="steam-card">
+  <section class="steam-card" hidden data-disabled="true">
     <div class="section-title">recently played on steam</div>
     <div id="steam-games" class="steam-games">
       <div class="steam-loading">loading games..</div>
@@ -851,7 +851,7 @@ function formatSteamMinutes(minutes) {
 
 async function loadSteamGames() {
   const container = document.getElementById("steam-games");
-  if (!container) return;
+  if (!container || container.closest(".steam-card")?.hidden) return;
 
   try {
     const response = await fetch(STEAM_FUNCTION_URL, { cache: "no-store" });
