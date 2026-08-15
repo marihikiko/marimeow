@@ -850,6 +850,15 @@
       }
     }
 
+
+    .about-cycle{
+      min-height:20px;
+      color:var(--pad);
+      text-align:center;
+      transition:opacity .22s ease;
+    }
+    .about-cycle.changing{opacity:0}
+
   </style>
 </head>
 <body>
@@ -969,6 +978,35 @@
 
 <script>
 
+
+
+const aboutLines = [
+  "im cool ur drool.. :3",
+  "feel free to dm me!!",
+  "hi im mari xd"
+];
+
+const aboutCycle = document.getElementById("about-cycle");
+let currentAboutLine = aboutLines.indexOf(aboutCycle?.textContent || "");
+
+function changeAboutLine() {
+  if (!aboutCycle) return;
+
+  let nextLine;
+  do {
+    nextLine = Math.floor(Math.random() * aboutLines.length);
+  } while (nextLine === currentAboutLine);
+
+  aboutCycle.classList.add("changing");
+
+  setTimeout(() => {
+    currentAboutLine = nextLine;
+    aboutCycle.textContent = aboutLines[currentAboutLine];
+    aboutCycle.classList.remove("changing");
+  }, 220);
+}
+
+setInterval(changeAboutLine, 3500);
 
 const STEAM_FUNCTION_URL =
   "https://jyjvqbpnpnbxrkprrgli.supabase.co/functions/v1/steam-recent";
