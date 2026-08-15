@@ -162,6 +162,33 @@
       to{ transform:translateY(110vh) rotate(360deg); }
     }
 
+
+    .page-stack{
+      width:min(92vw,560px);
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:18px;
+      margin:20px 0 40px;
+      position:relative;
+      z-index:1;
+    }
+    .page-stack .card{
+      width:100%;
+      margin:0;
+    }
+    .page-stack > .about-me{
+      width:min(88%,440px);
+      margin:0;
+      padding:18px;
+      background:var(--card);
+      border:3px solid var(--pink);
+      border-radius:18px;
+      box-shadow:0 7px 0 var(--shadow);
+      position:relative;
+      z-index:1;
+    }
+
     .card{
       width:min(92vw,560px);
       background:var(--card);
@@ -533,6 +560,7 @@
   <div class="float" style="left:70%; animation-delay:1s;">🐾</div>
   <div class="float" style="left:88%; animation-delay:3.5s;">❤</div>
 
+  <div class="page-stack">
   <main class="card">
     <span class="ear left"></span>
     <span class="ear right"></span>
@@ -552,16 +580,7 @@
     </div>
 
 
-    <section class="about-me">
-      <div class="section-title">♡ about me ♡</div>
-      <p>i have a bunny named mochi!! i like screamo and punk ^.^</p>
-      <div class="section-title">my fav bands/artists</div>
-      <div class="band-links">
-        <a class="band-link" href="https://open.spotify.com/artist/7yzr5zUDHeXWj3IzK9ffLQ?si=b775ba8d77074b34" target="_blank" rel="noopener noreferrer">Yen ↗</a>
-        <a class="band-link" href="https://open.spotify.com/artist/7ocHgk6jaUOwvzkNyU0op0?si=1cf0518009cf4c3f" target="_blank" rel="noopener noreferrer">departmefrombearisland ↗</a>
-        <a class="band-link" href="https://open.spotify.com/artist/428Jnte7ijQ5BCSXQoxpmO?si=6d32fc1eb99d47e9" target="_blank" rel="noopener noreferrer">foxtails ↗</a>
-      </div>
-    </section>
+
 
     <section class="discord-live" id="discord-live" aria-live="polite">
       <div class="discord-avatar-wrap">
@@ -596,6 +615,18 @@
       <span style="font-size:7px; opacity:.7;">psst.. try the konami code</span>
     </div>
   </main>
+
+    <section class="about-me">
+      <div class="section-title">♡ about me ♡</div>
+      <p>i have a bunny named mochi!! i like screamo and punk ^.^</p>
+      <div class="section-title">my fav bands/artists</div>
+      <div class="band-links">
+        <a class="band-link" href="https://open.spotify.com/artist/7yzr5zUDHeXWj3IzK9ffLQ?si=b775ba8d77074b34" target="_blank" rel="noopener noreferrer">Yen ↗</a>
+        <a class="band-link" href="https://open.spotify.com/artist/7ocHgk6jaUOwvzkNyU0op0?si=1cf0518009cf4c3f" target="_blank" rel="noopener noreferrer">departmefrombearisland ↗</a>
+        <a class="band-link" href="https://open.spotify.com/artist/428Jnte7ijQ5BCSXQoxpmO?si=6d32fc1eb99d47e9" target="_blank" rel="noopener noreferrer">foxtails ↗</a>
+      </div>
+    </section>
+  </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
