@@ -537,6 +537,24 @@
       opacity:.6;
       margin-top:4px;
     }
+    .owner-login{
+      display:block;
+      margin:10px auto 0;
+      padding:0;
+      border:0;
+      background:transparent;
+      color:var(--pad);
+      font:inherit;
+      font-size:6px;
+      opacity:.55;
+      text-decoration:underline;
+    }
+    .owner-login:hover{opacity:1}
+    .owner-login.logged-in{
+      color:#23a55a;
+      opacity:.8;
+      text-decoration:none;
+    }
     .gb-note{
       font-size:7px;
       opacity:.65;
@@ -1036,6 +1054,7 @@
         <button type="submit" class="btn gb-submit">sign!! 🐾</button>
       </form>
       <div id="gb-entries" class="gb-entries"></div>
+      <button id="owner-login" class="owner-login" type="button">owner login</button>
     </div>
   </section>
 
@@ -1480,8 +1499,57 @@ for (let i = 0; i < 8; i++) {
     const nameEl = document.getElementById("gb-name");
     const msgEl = document.getElementById("gb-msg");
     const list = document.getElementById("gb-entries");
+    const ownerLogin = document.getElementById("owner-login");
+    const OWNER_FUNCTION_URL =
+      "https://jyjvqbpnpnbxrkprrgli.supabase.co/functions/v1/guestbook-owner";
+    let ownerKey = localStorage.getItem("guestbookOwnerKey") || "";
 
     if (!form || !nameEl || !msgEl || !list) return;
+
+    function updateOwnerLogin() {
+      if (!ownerLogin) return;
+      ownerLogin.textContent = ownerKey ? "owner mode active" : "owner login";
+      ownerLogin.classList.toggle("logged-in", Boolean(ownerKey));
+    }
+
+    async function verifyOwnerKey(key) {
+      const response = await fetch(OWNER_FUNCTION_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ action: "verify", ownerKey: key })
+      });
+      return response.ok;
+    }
+
+    ownerLogin?.addEventListener("click", async () => {
+      if (ownerKey) {
+        if (confirm("log out of owner mode?")) {
+          ownerKey = "";
+          localStorage.removeItem("guestbookOwnerKey");
+          updateOwnerLogin();
+        }
+        return;
+      }
+
+      const enteredKey = prompt("owner code:");
+      if (!enteredKey) return;
+
+      ownerLogin.disabled = true;
+      const valid = await verifyOwnerKey(enteredKey).catch(() => false);
+      ownerLogin.disabled = false;
+
+      if (!valid) {
+        alert("wrong owner code");
+        return;
+      }
+
+      ownerKey = enteredKey;
+      localStorage.setItem("guestbookOwnerKey", ownerKey);
+      updateOwnerLogin();
+      alert("owner mode enabled");
+    });
+
+    updateOwnerLogin();
 
     function escapeHtml(str) {
       return str.replace(/[&<>"']/g, char => ({
@@ -1518,7 +1586,7 @@ for (let i = 0; i < 8; i++) {
 
       list.innerHTML = data.map(entry => `
         <div class="gb-entry">
-          <b>${escapeHtml(entry.name)}</b>${entry.name.trim().toLowerCase() === "mari" ? '<span class="owner-badge">OWNER</span>' : ""}: 
+          <b>${escapeHtml(entry.name)}</b>${entry.is_owner ? '<span class="owner-badge">OWNER</span>' : ""}: 
           ${escapeHtml(entry.message)}
           <span class="gb-time">
             ${new Date(entry.created_at).toLocaleString()}
@@ -1668,17 +1736,37 @@ function containsBlockedWord(text) {
       alert("please keep the guestbook respectful");
       return;
       }
-      const { error } = await supabaseClient
-        .from("guestbook")
-        .insert([
-          {
-            name: name,
-            message: message
-          }
-        ]);
+      let postError = null;
 
-      if (error) {
-        console.error("Guestbook insert error:", error);
+      if (ownerKey) {
+        try {
+          const response = await fetch(OWNER_FUNCTION_URL, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              ownerKey,
+              name,
+              message
+            })
+          });
+
+          if (!response.ok) {
+            const result = await response.json().catch(() => ({}));
+            throw new Error(result.error || "owner post failed");
+          }
+        } catch (error) {
+          postError = error;
+        }
+      } else {
+        const { error } = await supabaseClient
+          .from("guestbook")
+          .insert([{ name, message }]);
+
+        postError = error;
+      }
+
+      if (postError) {
+        console.error("Guestbook insert error:", postError);
         alert("failed to post message");
         return;
       }
