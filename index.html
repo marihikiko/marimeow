@@ -700,6 +700,41 @@
       .page-stack .community-card{order:3}
     }
 
+
+    /* cute pink Discord background */
+    .discord-live{
+      position:relative;
+      overflow:hidden;
+      isolation:isolate;
+      background:#ffb8dc;
+    }
+    .discord-live::before{
+      content:"";
+      position:absolute;
+      inset:-12px;
+      z-index:-2;
+      background-color:#ffb8dc;
+      background-image:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='90' viewBox='0 0 120 90'%3E%3Cg opacity='.65'%3E%3Cpath fill='%23fff0f8' d='M23 27C10 17 2 37 23 51C44 37 36 17 23 27Z'/%3E%3Cpath fill='%23ff70b8' d='M91 58C80 49 73 66 91 78C109 66 102 49 91 58Z'/%3E%3Ccircle cx='87' cy='17' r='6' fill='%23ffe4f3'/%3E%3Ccircle cx='54' cy='67' r='4' fill='%23ff80c2'/%3E%3C/g%3E%3C/svg%3E"),
+        radial-gradient(circle at 20% 30%,%23ffd8eb 0 16%,transparent 17%),
+        radial-gradient(circle at 80% 70%,%23ff8fc8 0 14%,transparent 15%);
+      background-size:120px 90px,180px 180px,210px 210px;
+      filter:blur(3px);
+      transform:scale(1.06);
+    }
+    .discord-live::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      z-index:-1;
+      background:rgba(95,20,67,.28);
+    }
+    .discord-live > *{
+      position:relative;
+      z-index:1;
+    }
+    .discord-status-dot{border-color:#fff0fa}
+
   </style>
 </head>
 <body>
