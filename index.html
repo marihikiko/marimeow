@@ -735,6 +735,56 @@
     }
     .discord-status-dot{border-color:#fff0fa}
 
+
+    .bunny-card{
+      position:absolute;
+      top:0;
+      right:calc(50% + 302px);
+      width:300px;
+      padding:18px;
+      background:var(--card);
+      border:3px solid var(--pink);
+      border-radius:18px;
+      box-shadow:0 7px 0 var(--shadow);
+    }
+    .bunny-card > .section-title{
+      text-align:center;
+      font-size:9px;
+      line-height:1.5;
+    }
+    .bunny-gallery{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:8px;
+      margin-top:14px;
+    }
+    .bunny-gallery a{
+      display:block;
+      aspect-ratio:1;
+      overflow:hidden;
+      border:2px solid var(--pink2);
+      border-radius:10px;
+      background:#fff;
+      box-shadow:0 3px 0 var(--shadow);
+      transition:transform .08s ease;
+    }
+    .bunny-gallery a:hover{transform:translateY(-2px)}
+    .bunny-gallery img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+    }
+    @media (max-width:1100px){
+      .page-stack .bunny-card{
+        position:static;
+        width:min(92%,440px);
+        align-self:center;
+        order:2;
+      }
+      .page-stack .community-card{order:3}
+    }
+
   </style>
 </head>
 <body>
@@ -826,6 +876,21 @@
 
 
 
+
+  <section class="bunny-card">
+    <div class="section-title">pics of my bunny ^.^</div>
+    <div class="bunny-gallery">
+      <a href="mochi-1.jpg" target="_blank" rel="noopener noreferrer">
+        <img src="mochi-1.jpg" alt="Mochi eating a treat" loading="lazy">
+      </a>
+      <a href="mochi-2.jpg" target="_blank" rel="noopener noreferrer">
+        <img src="mochi-2.jpg" alt="Mochi relaxing on a blanket" loading="lazy">
+      </a>
+      <a href="mochi-3.jpg" target="_blank" rel="noopener noreferrer">
+        <img src="mochi-3.jpg" alt="Mochi with hay on her head" loading="lazy">
+      </a>
+    </div>
+  </section>
 
   <section class="steam-card" hidden data-disabled="true">
     <div class="section-title">recently played on steam</div>
