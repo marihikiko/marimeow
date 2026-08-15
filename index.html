@@ -630,6 +630,76 @@
       }
     }
 
+
+    .steam-card{
+      position:absolute;
+      top:0;
+      right:calc(50% + 302px);
+      width:300px;
+      padding:18px;
+      background:var(--card);
+      border:3px solid var(--pink);
+      border-radius:18px;
+      box-shadow:0 7px 0 var(--shadow);
+      text-align:left;
+    }
+    .steam-card > .section-title{
+      text-align:center;
+      line-height:1.5;
+    }
+    .steam-games{
+      display:flex;
+      flex-direction:column;
+      gap:11px;
+      margin-top:14px;
+    }
+    .steam-game{
+      display:block;
+      overflow:hidden;
+      color:var(--text);
+      background:#fff;
+      border:2px solid var(--pink2);
+      border-radius:10px;
+      text-decoration:none;
+      box-shadow:0 3px 0 var(--shadow);
+      transition:transform .08s ease;
+    }
+    .steam-game:hover{transform:translateY(-2px)}
+    .steam-game img{
+      width:100%;
+      aspect-ratio:460/215;
+      object-fit:cover;
+      display:block;
+      border-bottom:2px solid var(--pink2);
+    }
+    .steam-game-info{padding:8px}
+    .steam-game-name{
+      font-size:8px;
+      line-height:1.5;
+      overflow-wrap:anywhere;
+    }
+    .steam-game-time{
+      margin-top:5px;
+      font-size:7px;
+      line-height:1.4;
+      opacity:.7;
+    }
+    .steam-loading{
+      padding:12px;
+      font-size:8px;
+      line-height:1.5;
+      text-align:center;
+    }
+    @media (max-width:1100px){
+      .page-stack .steam-card{
+        position:static;
+        width:min(92%,440px);
+        align-self:center;
+        order:2;
+      }
+      .page-stack .community-card{order:3}
+    }
+
   </style>
 </head>
 <body>
@@ -722,11 +792,66 @@
 
 
 
+  <section class="steam-card">
+    <div class="section-title">recently played on steam</div>
+    <div id="steam-games" class="steam-games">
+      <div class="steam-loading">loading games..</div>
+    </div>
+  </section>
+
   </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
+
+
+const STEAM_FUNCTION_URL =
+  "https://jyjvqbpnpnbxrkprrgli.supabase.co/functions/v1/steam-recent";
+
+function formatSteamMinutes(minutes) {
+  const hours = Number(minutes || 0) / 60;
+  return hours < 10 ? hours.toFixed(1) : Math.round(hours).toString();
+}
+
+async function loadSteamGames() {
+  const container = document.getElementById("steam-games");
+  if (!container) return;
+
+  try {
+    const response = await fetch(STEAM_FUNCTION_URL, { cache: "no-store" });
+    const payload = await response.json();
+    if (!response.ok) throw new Error(payload.error || "Steam request failed");
+
+    if (!payload.games?.length) {
+      container.innerHTML = '<div class="steam-loading">no recent games found..</div>';
+      return;
+    }
+
+    container.innerHTML = payload.games.map(game => `
+      <a class="steam-game" href="${game.url}" target="_blank" rel="noopener noreferrer">
+        <img src="${game.artwork}" alt="" loading="lazy">
+        <div class="steam-game-info">
+          <div class="steam-game-name">${escapeSteamHtml(game.name)}</div>
+          <div class="steam-game-time">
+            ${formatSteamMinutes(game.playtimeTwoWeeks)}h past 2 weeks
+          </div>
+        </div>
+      </a>
+    `).join("");
+  } catch (error) {
+    container.innerHTML = '<div class="steam-loading">steam is unavailable rn..</div>';
+    console.error("Steam games error:", error);
+  }
+}
+
+function escapeSteamHtml(value) {
+  const element = document.createElement("div");
+  element.textContent = String(value ?? "");
+  return element.innerHTML;
+}
+
+loadSteamGames();
 
 const DISCORD_USER_ID = "680091835204763718";
 
