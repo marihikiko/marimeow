@@ -163,6 +163,25 @@
     }
 
 
+
+    .community-card{
+      width:100%;
+      padding:24px 28px;
+      background:var(--card);
+      border:4px solid var(--pink);
+      border-radius:20px;
+      box-shadow:0 9px 0 var(--shadow);
+      position:relative;
+      z-index:1;
+    }
+    .community-card > .section-title{
+      text-align:center;
+      font-size:10px;
+    }
+    .community-card .guestbook{
+      margin-top:20px;
+    }
+
     .page-stack{
       width:min(92vw,560px);
       display:flex;
@@ -582,6 +601,17 @@
 
 
 
+    <section class="about-me">
+      <div class="section-title">♡ about me ♡</div>
+      <p>i have a bunny named mochi!! i like screamo and punk ^.^</p>
+      <div class="section-title">my fav bands/artists</div>
+      <div class="band-links">
+        <a class="band-link" href="https://open.spotify.com/artist/7yzr5zUDHeXWj3IzK9ffLQ?si=b775ba8d77074b34" target="_blank" rel="noopener noreferrer">Yen ↗</a>
+        <a class="band-link" href="https://open.spotify.com/artist/7ocHgk6jaUOwvzkNyU0op0?si=1cf0518009cf4c3f" target="_blank" rel="noopener noreferrer">departmefrombearisland ↗</a>
+        <a class="band-link" href="https://open.spotify.com/artist/428Jnte7ijQ5BCSXQoxpmO?si=6d32fc1eb99d47e9" target="_blank" rel="noopener noreferrer">foxtails ↗</a>
+      </div>
+    </section>
+
     <section class="discord-live" id="discord-live" aria-live="polite">
       <div class="discord-avatar-wrap">
         <img id="discord-avatar" class="discord-avatar" src="discord.png" alt="Discord avatar">
@@ -595,6 +625,14 @@
       </div>
     </section>
 
+    <div class="footer">
+      best viewed with a computer.. &lt;.&lt; ✧<br>
+      <span style="font-size:7px; opacity:.7;">psst.. try the konami code</span>
+    </div>
+  </main>
+
+  <section class="community-card">
+    <div class="section-title">🐾 visitors + guestbook 🐾</div>
     <div class="counter-wrap">
       <div class="counter-label">you are visitor</div>
       <div class="counter-digits" id="visit-counter">000000</div>
@@ -609,23 +647,11 @@
       </form>
       <div id="gb-entries" class="gb-entries"></div>
     </div>
+  </section>
 
-    <div class="footer">
-      best viewed with a computer.. &lt;.&lt; ✧<br>
-      <span style="font-size:7px; opacity:.7;">psst.. try the konami code</span>
-    </div>
-  </main>
 
-    <section class="about-me">
-      <div class="section-title">♡ about me ♡</div>
-      <p>i have a bunny named mochi!! i like screamo and punk ^.^</p>
-      <div class="section-title">my fav bands/artists</div>
-      <div class="band-links">
-        <a class="band-link" href="https://open.spotify.com/artist/7yzr5zUDHeXWj3IzK9ffLQ?si=b775ba8d77074b34" target="_blank" rel="noopener noreferrer">Yen ↗</a>
-        <a class="band-link" href="https://open.spotify.com/artist/7ocHgk6jaUOwvzkNyU0op0?si=1cf0518009cf4c3f" target="_blank" rel="noopener noreferrer">departmefrombearisland ↗</a>
-        <a class="band-link" href="https://open.spotify.com/artist/428Jnte7ijQ5BCSXQoxpmO?si=6d32fc1eb99d47e9" target="_blank" rel="noopener noreferrer">foxtails ↗</a>
-      </div>
-    </section>
+
+
   </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
