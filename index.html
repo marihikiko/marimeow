@@ -909,6 +909,34 @@
     }
     body.lightbox-open{overflow:hidden}
 
+
+    .gb-reactions{
+      display:flex;
+      gap:6px;
+      flex-wrap:wrap;
+      margin-top:8px;
+      padding-top:7px;
+      border-top:1px dashed var(--pink2);
+    }
+    .reaction-btn{
+      min-width:44px;
+      padding:5px 7px;
+      border:2px solid var(--pink2);
+      border-radius:9px;
+      color:var(--text);
+      background:#fff0fa;
+      box-shadow:0 2px 0 var(--shadow);
+      font:8px/1.2 "Press Start 2P",system-ui;
+    }
+    .reaction-btn:hover:not(:disabled){transform:translateY(-1px)}
+    .reaction-btn.reacted{
+      color:var(--pad);
+      border-color:var(--pad);
+      background:#ffd7ed;
+      opacity:1;
+    }
+    .reaction-btn:disabled{cursor:default}
+
   </style>
 </head>
 <body>
@@ -1481,9 +1509,83 @@ for (let i = 0; i < 8; i++) {
           <span class="gb-time">
             ${new Date(entry.created_at).toLocaleString()}
           </span>
+          <div class="gb-reactions" data-entry-id="${entry.id}">
+            <button class="reaction-btn" type="button" data-reaction="paw" aria-label="React with paw">🐾 <span>0</span></button>
+            <button class="reaction-btn" type="button" data-reaction="heart" aria-label="React with heart">♡ <span>0</span></button>
+            <button class="reaction-btn" type="button" data-reaction="skull" aria-label="React with skull">☠ <span>0</span></button>
+          </div>
         </div>
       `).join("");
+
+      await loadReactions();
     }
+
+    let guestbookVisitorId = localStorage.getItem("guestbookVisitorId");
+
+    if (!guestbookVisitorId) {
+      guestbookVisitorId = crypto.randomUUID();
+      localStorage.setItem("guestbookVisitorId", guestbookVisitorId);
+    }
+
+    async function loadReactions() {
+      const { data, error } = await supabaseClient
+        .from("guestbook_reactions")
+        .select("entry_id,reaction");
+
+      if (error) {
+        console.error("Reaction load error:", error);
+        return;
+      }
+
+      const counts = {};
+
+      (data || []).forEach(row => {
+        const key = `${row.entry_id}:${row.reaction}`;
+        counts[key] = (counts[key] || 0) + 1;
+      });
+
+      list.querySelectorAll(".reaction-btn").forEach(button => {
+        const entryId = button.closest(".gb-reactions").dataset.entryId;
+        const reaction = button.dataset.reaction;
+        const key = `${entryId}:${reaction}`;
+        button.querySelector("span").textContent = counts[key] || 0;
+
+        if (localStorage.getItem(`gbReacted:${key}`) === "true") {
+          button.classList.add("reacted");
+          button.disabled = true;
+        }
+      });
+    }
+
+    list.addEventListener("click", async event => {
+      const button = event.target.closest(".reaction-btn");
+      if (!button || button.disabled) return;
+
+      const entryId = Number(button.closest(".gb-reactions").dataset.entryId);
+      const reaction = button.dataset.reaction;
+      const key = `${entryId}:${reaction}`;
+
+      button.disabled = true;
+
+      const { error } = await supabaseClient
+        .from("guestbook_reactions")
+        .insert([{
+          entry_id: entryId,
+          visitor_id: guestbookVisitorId,
+          reaction
+        }]);
+
+      if (error && error.code !== "23505") {
+        console.error("Reaction error:", error);
+        button.disabled = false;
+        return;
+      }
+
+      localStorage.setItem(`gbReacted:${key}`, "true");
+      button.classList.add("reacted");
+      await loadReactions();
+    });
+
     const blockedWords = [
   "nigger",
   "nigga",
