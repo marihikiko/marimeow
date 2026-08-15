@@ -517,6 +517,20 @@
       line-height:1.6;
     }
     .gb-entry b{ color:var(--pad); }
+    .owner-badge{
+      display:inline-block;
+      margin-left:5px;
+      padding:2px 5px;
+      color:#fff;
+      background:var(--pad);
+      border:1px solid #ff2f9e;
+      border-radius:6px;
+      font-size:6px;
+      line-height:1.3;
+      vertical-align:middle;
+      text-shadow:1px 1px #a8196d;
+      box-shadow:0 2px 0 var(--shadow);
+    }
     .gb-entry .gb-time{
       display:block;
       font-size:7px;
@@ -1504,7 +1518,7 @@ for (let i = 0; i < 8; i++) {
 
       list.innerHTML = data.map(entry => `
         <div class="gb-entry">
-          <b>${escapeHtml(entry.name)}</b>: 
+          <b>${escapeHtml(entry.name)}</b>${entry.name.trim().toLowerCase() === "mari" ? '<span class="owner-badge">OWNER</span>' : ""}: 
           ${escapeHtml(entry.message)}
           <span class="gb-time">
             ${new Date(entry.created_at).toLocaleString()}
