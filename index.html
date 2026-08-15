@@ -241,6 +241,73 @@
       line-height:1.8;
       margin:0 0 18px;
     }
+
+    .discord-live{
+      margin:18px auto 22px;
+      max-width:440px;
+      min-height:116px;
+      padding:16px;
+      display:flex;
+      align-items:center;
+      gap:16px;
+      text-align:left;
+      color:#fff;
+      background:linear-gradient(120deg,#281047,#632f53 58%,#7d4b2b);
+      border:3px solid var(--pink);
+      border-radius:18px;
+      box-shadow:0 7px 0 var(--shadow);
+    }
+    .discord-avatar-wrap{position:relative;flex:0 0 auto}
+    .discord-avatar{
+      width:82px;
+      height:82px;
+      object-fit:cover;
+      border-radius:50%;
+      border:3px solid #fff8;
+      display:block;
+    }
+    .discord-status-dot{
+      position:absolute;
+      right:2px;
+      bottom:2px;
+      width:20px;
+      height:20px;
+      border:4px solid #4a2345;
+      border-radius:50%;
+    }
+    .status-online{background:#23a55a}
+    .status-idle{background:#f0b232}
+    .status-dnd{background:#f23f43}
+    .status-offline{background:#80848e}
+    .discord-info{min-width:0;flex:1}
+    .discord-name{
+      font-size:15px;
+      line-height:1.45;
+      overflow-wrap:anywhere;
+      text-shadow:2px 2px #2b0a20;
+    }
+    .discord-username{
+      margin-top:2px;
+      font-size:8px;
+      opacity:.75;
+    }
+    .discord-activity{
+      margin-top:10px;
+      font-size:8px;
+      line-height:1.5;
+    }
+    .discord-now-playing{
+      margin-top:7px;
+      font-size:7px;
+      line-height:1.5;
+      color:#ffd7ed;
+    }
+    @media (max-width:420px){
+      .discord-live{align-items:flex-start}
+      .discord-avatar{width:66px;height:66px}
+      .discord-name{font-size:11px}
+    }
+
     .discord-wrap{
       position:relative;
       width:200px;
@@ -496,10 +563,18 @@
       </div>
     </section>
 
-    <div class="discord-wrap">
-      <img src="discord.png" alt="My Discord profile" class="discord">
-      <div class="paw-badge">🐾</div>
-    </div>
+    <section class="discord-live" id="discord-live" aria-live="polite">
+      <div class="discord-avatar-wrap">
+        <img id="discord-avatar" class="discord-avatar" src="discord.png" alt="Discord avatar">
+        <span id="discord-status-dot" class="discord-status-dot status-offline"></span>
+      </div>
+      <div class="discord-info">
+        <div id="discord-name" class="discord-name">loading discord..</div>
+        <div id="discord-username" class="discord-username">@mari</div>
+        <div id="discord-custom-status" class="discord-activity">checking status..</div>
+        <div id="discord-now-playing" class="discord-now-playing"></div>
+      </div>
+    </section>
 
     <div class="counter-wrap">
       <div class="counter-label">you are visitor</div>
@@ -525,6 +600,62 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
+
+const DISCORD_USER_ID = "680091835204763718";
+
+function discordAvatarUrl(user) {
+  if (!user || !user.avatar) {
+    const fallback = Number(BigInt(user?.id || "0") >> 22n) % 6;
+    return `https://cdn.discordapp.com/embed/avatars/${fallback}.png`;
+  }
+  const ext = user.avatar.startsWith("a_") ? "gif" : "png";
+  return `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.${ext}?size=256`;
+}
+
+async function loadDiscordPresence() {
+  const nameEl = document.getElementById("discord-name");
+  const usernameEl = document.getElementById("discord-username");
+  const avatarEl = document.getElementById("discord-avatar");
+  const statusEl = document.getElementById("discord-status-dot");
+  const customEl = document.getElementById("discord-custom-status");
+  const playingEl = document.getElementById("discord-now-playing");
+  if (!nameEl || !usernameEl || !avatarEl || !statusEl || !customEl || !playingEl) return;
+
+  try {
+    const response = await fetch(`https://api.lanyard.rest/v1/users/${DISCORD_USER_ID}`, { cache: "no-store" });
+    const payload = await response.json();
+    if (!response.ok || !payload.success) throw new Error("not registered with Lanyard");
+
+    const data = payload.data;
+    const user = data.discord_user;
+    nameEl.textContent = user.global_name || user.display_name || user.username;
+    usernameEl.textContent = `@${user.username}`;
+    avatarEl.src = discordAvatarUrl(user);
+
+    statusEl.className = `discord-status-dot status-${data.discord_status || "offline"}`;
+    statusEl.title = data.discord_status || "offline";
+
+    const custom = (data.activities || []).find(activity => activity.type === 4);
+    customEl.textContent = custom?.state || data.discord_status || "offline";
+
+    if (data.listening_to_spotify && data.spotify) {
+      playingEl.textContent = `♫ ${data.spotify.song} — ${data.spotify.artist}`;
+    } else {
+      const activity = (data.activities || []).find(item => item.type === 0);
+      playingEl.textContent = activity ? `playing ${activity.name}` : "";
+    }
+  } catch (error) {
+    nameEl.textContent = "discord unavailable";
+    usernameEl.textContent = "join Lanyard to show live status";
+    customEl.textContent = "discord.gg/lanyard";
+    playingEl.textContent = "";
+    console.error("Discord presence error:", error);
+  }
+}
+
+loadDiscordPresence();
+setInterval(loadDiscordPresence, 30000);
+
 const music = document.getElementById("bg-music");
 const audioToggle = document.getElementById("audio-toggle");
 
