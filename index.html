@@ -903,7 +903,6 @@
     <section class="about-me">
       <div class="section-title">♡ about me ♡</div>
       <p id="about-cycle" class="about-cycle">hi im mari xd</p>
-      <p>i speak 🇺🇸🇺🇦🇷🇺🇳🇱, feel free to dm me >.<</p>
       <div class="section-title">my fav bands/artists</div>
       <div class="band-links">
         <a class="band-link" href="https://open.spotify.com/artist/7yzr5zUDHeXWj3IzK9ffLQ?si=b775ba8d77074b34" target="_blank" rel="noopener noreferrer">Yen ↗</a>
@@ -988,26 +987,11 @@ const aboutLines = [
 ];
 
 const aboutCycle = document.getElementById("about-cycle");
-let currentAboutLine = aboutLines.indexOf(aboutCycle?.textContent || "");
 
-function changeAboutLine() {
-  if (!aboutCycle) return;
-
-  let nextLine;
-  do {
-    nextLine = Math.floor(Math.random() * aboutLines.length);
-  } while (nextLine === currentAboutLine);
-
-  aboutCycle.classList.add("changing");
-
-  setTimeout(() => {
-    currentAboutLine = nextLine;
-    aboutCycle.textContent = aboutLines[currentAboutLine];
-    aboutCycle.classList.remove("changing");
-  }, 220);
+if (aboutCycle) {
+  aboutCycle.textContent =
+    aboutLines[Math.floor(Math.random() * aboutLines.length)];
 }
-
-setInterval(changeAboutLine, 3500);
 
 const STEAM_FUNCTION_URL =
   "https://jyjvqbpnpnbxrkprrgli.supabase.co/functions/v1/steam-recent";
