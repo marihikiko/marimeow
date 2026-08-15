@@ -598,6 +598,38 @@
       }
     }
 
+
+    /* keep the kitty card centered independently */
+    .page-stack{
+      width:min(96vw,1240px);
+      display:block;
+      position:relative;
+      margin:20px auto 40px;
+    }
+    .page-stack .card{
+      width:min(92vw,560px);
+      margin:0 auto;
+    }
+    .page-stack .community-card{
+      position:absolute;
+      top:0;
+      left:calc(50% + 302px);
+      width:300px;
+    }
+    @media (max-width:1100px){
+      .page-stack{
+        width:min(92vw,560px);
+        display:flex;
+        flex-direction:column;
+      }
+      .page-stack .card{width:100%}
+      .page-stack .community-card{
+        position:static;
+        width:min(92%,440px);
+        align-self:center;
+      }
+    }
+
   </style>
 </head>
 <body>
