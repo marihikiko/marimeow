@@ -762,6 +762,58 @@
     }
     .reaction-btn:disabled{cursor:default}
 
+    .guestbook-wrap{
+    position:relative;
+    margin-top:18px;
+  }
+
+  .guestbook-closed-sign{
+    position:absolute;
+    top:70px;
+    left:50%;
+    transform:translateX(-50%) rotate(-2deg);
+    z-index:10;
+
+    width:240px;
+    padding:16px 14px;
+
+    background:#fff;
+    border:3px solid var(--pink);
+    border-radius:10px;
+
+    
+    box-shadow:
+    0 12px 24px rgba(0,0,0,.28),
+    0 5px 10px rgba(0,0,0,.18);
+
+    text-align:center;
+    color:var(--pad);
+    font-size:10px;
+    line-height:1.6;
+    pointer-events:none;
+  }
+
+  .guestbook-closed-sign small{
+    display:block;
+    margin-top:5px;
+    font-size:7px;
+    color:var(--text);
+    line-height:1.5;
+  }
+  /* TEMPORARY GUESTBOOK REMOVAL!!! */
+  
+    .guestbook{
+      pointer-events:none;
+      user-select:none;
+      opacity:.75;
+    }
+
+    .guestbook input,
+    .guestbook textarea,
+    .guestbook button{
+      cursor:not-allowed;
+    }
+
   </style>
 </head>
 <body>
@@ -835,16 +887,25 @@
       <div class="counter-digits" id="visit-counter">000000</div>
     </div>
 
+      <div class="guestbook-wrap">
+    <div class="guestbook-closed-sign">
+      TEMPORARILY CLOSED
+      <small>due to backend issues ://</small>
+    </div>
+
     <div class="guestbook">
       <div class="section-title">🐾 guestbook 🐾</div>
+
       <form id="gb-form" class="gb-form">
         <input id="gb-name" class="gb-input" type="text" placeholder="ur name" maxlength="20" required>
         <textarea id="gb-msg" class="gb-input" rows="2" placeholder="leave a paw print.." maxlength="140" required></textarea>
         <button type="submit" class="btn gb-submit">sign!! 🐾</button>
       </form>
+
       <div id="gb-entries" class="gb-entries"></div>
       <button id="owner-login" class="owner-login" type="button">owner login</button>
     </div>
+  </div>
   </section>
 
 
