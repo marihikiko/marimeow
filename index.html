@@ -10,7 +10,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
-
 <style>
 :root {
   --bg: #070609;
@@ -23,18 +22,15 @@
   --muted: #786674;
   --silver: #a99eae;
 }
-
 * {
   box-sizing: border-box;
   scrollbar-color: #71162c #09070b;
   scrollbar-width: thin;
 }
-
 html {
   background: var(--bg);
   scroll-behavior: smooth;
 }
-
 body {
   min-height: 100vh;
   margin: 0;
@@ -48,7 +44,6 @@ body {
   font: 13px/1.8 "Share Tech Mono", monospace;
   cursor: crosshair;
 }
-
 body::before {
   content: "";
   position: fixed;
@@ -60,7 +55,6 @@ body::before {
   background-size: 100px 100px;
   mask-image: linear-gradient(to bottom, black, transparent 95%);
 }
-
 body::after {
   content: "";
   position: fixed;
@@ -70,15 +64,12 @@ body::after {
   opacity: .09;
   background: repeating-linear-gradient(0deg, transparent 0 3px, #000 4px);
 }
-
 a, button {
   cursor: pointer;
 }
-
 button, input, textarea {
   font: inherit;
 }
-
 .marquee-banner {
   position: fixed;
   inset: 0 0 auto;
@@ -92,7 +83,6 @@ button, input, textarea {
   border-bottom: 1px solid #84213a;
   box-shadow: 0 3px 18px #8d102333;
 }
-
 .marquee-track {
   display: inline-block;
   padding-left: 100%;
@@ -102,12 +92,10 @@ button, input, textarea {
   animation: marquee 24s linear infinite;
   text-shadow: 0 0 8px #a40d32;
 }
-
 @keyframes marquee {
   from { transform: translateX(0); }
   to { transform: translateX(-100%); }
 }
-
 .clock-widget {
   position: fixed;
   left: 16px;
@@ -122,9 +110,6 @@ button, input, textarea {
   letter-spacing: 2px;
   text-shadow: 0 0 8px #c21a42;
 }
-
-
-
 .page-stack {
   position: relative;
   z-index: 1;
@@ -132,19 +117,16 @@ button, input, textarea {
   width: min(96vw, 1240px);
   margin: 28px auto 50px;
 }
-
 .page-stack > .card {
   width: min(92vw, 560px);
   margin: 0 auto;
 }
-
 .page-stack .community-card {
   position: absolute;
   top: 0;
   left: calc(50% + 302px);
   width: 300px;
 }
-
 .page-stack .bunny-card {
   position: absolute;
   top: 0;
@@ -154,12 +136,9 @@ button, input, textarea {
   display: flex;
   flex-direction: column;
 }
-
 .page-stack .steam-card {
   display: none;
 }
-
-
 @media (max-width: 1100px) {
   .page-stack {
     display: flex;
@@ -169,35 +148,28 @@ button, input, textarea {
     margin: 28px auto 50px;
     gap: 22px;
   }
-
   .page-stack > * {
     position: static;
     width: 100%;
     margin: 0;
   }
-
   .page-stack > .card {
     width: 100%;
     order: 1;
   }
-
   .page-stack .community-card {
     width: 100%;
     order: 2;
   }
-
   .page-stack .bunny-card {
     width: 100%;
     bottom: auto;
     order: 3;
   }
-
   .page-stack .steam-card {
     display: none;
   }
-
   }
-
 .bunny-gallery {
   flex: 1;
   min-height: 0;
@@ -207,7 +179,6 @@ button, input, textarea {
   gap: 12px;
   margin-top: 14px;
 }
-
 .bunny-gallery a {
   display: flex;
   min-width: 0;
@@ -216,7 +187,6 @@ button, input, textarea {
   justify-content: center;
   overflow: hidden;
 }
-
 .bunny-gallery img {
   display: block;
   width: 100%;
@@ -225,25 +195,21 @@ button, input, textarea {
   max-width: 100%;
   object-fit: contain;
 }
-
 @media (max-width: 1100px) {
   .page-stack .bunny-card {
     position: static;
     width: min(100%, 440px);
     bottom: auto;
   }
-
   .page-stack .bunny-gallery {
     flex: none;
     min-height: 0;
     grid-template-rows: none;
   }
-
   .page-stack .bunny-gallery img {
     height: auto;
   }
 }
-
 .card, .community-card, .steam-card, .bunny-card {
   min-width: 0;
   color: var(--text);
@@ -252,14 +218,12 @@ button, input, textarea {
   border-radius: 2px;
   box-shadow: 0 0 0 4px #08060a, 0 0 0 5px #28111b, 0 14px 40px #000b, 0 0 30px #750e2418;
 }
-
 .card {
   position: relative;
   padding: 30px 26px 24px;
   overflow: hidden;
   text-align: center;
 }
-
 .windowbar {
   position: absolute;
   inset: 0 0 auto;
@@ -267,24 +231,20 @@ button, input, textarea {
   background: repeating-linear-gradient(135deg, #1c0c14 0 8px, #230d18 8px 16px);
   border-bottom: 1px solid #6d1c32;
 }
-
 .dots {
   display: flex;
   gap: 9px;
   padding: 10px 12px;
 }
-
 .dot {
   width: 9px;
   height: 9px;
   background: #170b11;
   border: 1px solid #a52a46;
 }
-
 .dot:first-child {
   background: #a51c39;
 }
-
 .mascot {
   margin-top: 42px;
   color: #a42a46;
@@ -292,7 +252,6 @@ button, input, textarea {
   letter-spacing: 4px;
   text-shadow: 0 0 14px #a30d332e;
 }
-
 h1 {
   min-height: 42px;
   margin: 14px 0;
@@ -303,27 +262,22 @@ h1 {
   text-shadow: 0 0 5px #9d1435, 0 0 25px #8b102a66;
   animation: gothic-flicker 7s infinite;
 }
-
 .tw-cursor {
   color: #e04461;
   animation: blink 1s step-end infinite;
 }
-
 @keyframes blink {
   50% { opacity: 0; }
 }
-
 @keyframes gothic-flicker {
   0%, 94%, 96%, 100% { opacity: 1; }
   95% { opacity: .72; }
 }
-
 p {
   color: #b3a5b0;
   font: 12px/1.9 "Share Tech Mono", monospace;
   overflow-wrap: anywhere;
 }
-
 .section-title {
   margin: 0 0 14px;
   color: #b42b49;
@@ -331,7 +285,6 @@ p {
   letter-spacing: 2px;
   text-transform: uppercase;
 }
-
 .dni {
   position: relative;
   z-index: 1;
@@ -345,12 +298,10 @@ p {
   line-height: 1.8;
   overflow-wrap: anywhere;
 }
-
 .dni b {
   color: #d02d4c;
   font-family: "Cinzel", serif;
 }
-
 .about-me {
   max-width: 440px;
   padding: 18px;
@@ -361,29 +312,24 @@ p {
   text-align: left;
   box-shadow: inset 0 0 24px #5d10200c;
 }
-
 .about-me .section-title {
   text-align: left;
 }
-
 .about-me p {
   margin: 0 0 14px;
   font-size: 11px;
 }
-
 .about-cycle {
   min-height: 20px;
   color: #bca9b6;
   text-align: left;
 }
-
 .band-links {
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
   gap: 7px;
 }
-
 .band-link {
   max-width: 100%;
   padding: 9px 10px;
@@ -395,7 +341,6 @@ p {
   overflow-wrap: anywhere;
   transition: .15s ease;
 }
-
 .band-link:hover {
   color: #f3c5d0;
   background: #32101d;
@@ -403,7 +348,6 @@ p {
   box-shadow: 0 0 12px #a317352d;
   transform: translateY(-2px);
 }
-
 .discord-live {
   position: relative;
   isolation: isolate;
@@ -421,7 +365,6 @@ p {
   text-align: left;
   box-shadow: inset 0 0 30px #9e173610, 0 0 18px #0008;
 }
-
 .discord-live::before {
   content: "";
   position: absolute;
@@ -431,7 +374,6 @@ p {
     radial-gradient(ellipse at 20% 40%, #4e1428 0, transparent 55%),
     repeating-linear-gradient(135deg, transparent 0 14px, #6a1a2b18 14px 15px);
 }
-
 .discord-live::after {
   content: "";
   position: absolute;
@@ -439,12 +381,10 @@ p {
   z-index: -1;
   background: linear-gradient(90deg, #0b080dd9, #180911b8);
 }
-
 .discord-avatar-wrap {
   position: relative;
   flex: 0 0 auto;
 }
-
 .discord-avatar {
   display: block;
   width: 78px;
@@ -453,7 +393,6 @@ p {
   border: 1px solid #9b2944;
   filter: saturate(.7) contrast(1.08);
 }
-
 .discord-status-dot {
   position: absolute;
   right: -4px;
@@ -463,30 +402,25 @@ p {
   border: 2px solid #100910;
   border-radius: 50%;
 }
-
 .status-online { background: #23a55a; }
 .status-idle { background: #f0b232; }
 .status-dnd { background: #f23f43; }
 .status-offline { background: #80848e; }
-
 .discord-info {
   flex: 1;
   min-width: 0;
 }
-
 .discord-name {
   color: #f0dce5;
   font: 600 15px/1.5 "Cinzel", serif;
   overflow-wrap: anywhere;
   text-shadow: 0 0 10px #9d1b3b55;
 }
-
 .discord-username {
   color: #96818f;
   font-size: 10px;
   overflow-wrap: anywhere;
 }
-
 .discord-activity {
   margin-top: 10px;
   color: #c72b4b;
@@ -494,7 +428,6 @@ p {
   line-height: 1.6;
   overflow-wrap: anywhere;
 }
-
 .discord-now-playing {
   margin-top: 7px;
   color: #b29ba9;
@@ -502,7 +435,6 @@ p {
   line-height: 1.6;
   overflow-wrap: anywhere;
 }
-
 .btn {
   padding: 12px 14px;
   color: #d5bdca;
@@ -514,7 +446,6 @@ p {
   letter-spacing: 1px;
   transition: .12s ease;
 }
-
 .btn:hover {
   color: #fff0f5;
   background: #3b1020;
@@ -522,12 +453,10 @@ p {
   box-shadow: 0 0 15px #a018382d;
   transform: translateY(-2px);
 }
-
 .btn:active {
   transform: translateY(1px);
   box-shadow: none;
 }
-
 .footer {
   padding-top: 16px;
   color: #796574;
@@ -535,11 +464,9 @@ p {
   font-size: 10px;
   letter-spacing: 1px;
 }
-
 .community-card, .steam-card, .bunny-card {
   padding: 18px;
 }
-
 .community-card > .section-title,
 .steam-card > .section-title,
 .bunny-card > .section-title {
@@ -550,7 +477,6 @@ p {
   letter-spacing: 1.5px;
   text-align: center;
 }
-
 .counter-wrap {
   display: flex;
   flex-direction: column;
@@ -558,14 +484,12 @@ p {
   gap: 10px;
   margin-top: 14px;
 }
-
 .counter-label {
   color: #877280;
   font-size: 10px;
   letter-spacing: 1px;
   text-align: center;
 }
-
 .counter-digits {
   max-width: 100%;
   padding: 10px 12px;
@@ -577,12 +501,10 @@ p {
   text-shadow: 0 0 8px #c71943;
   box-shadow: inset 0 0 15px #7d0f2a24;
 }
-
 .guestbook-wrap {
   position: relative;
   margin-top: 22px;
 }
-
 .guestbook {
   padding-top: 16px;
   border-top: 1px dashed #532036;
@@ -590,13 +512,11 @@ p {
   user-select: none;
   opacity: .55;
 }
-
 .guestbook input,
 .guestbook textarea,
 .guestbook button {
   cursor: not-allowed;
 }
-
 .guestbook-closed-sign {
   position: absolute;
   top: 70px;
@@ -615,7 +535,6 @@ p {
   text-align: center;
   pointer-events: none;
 }
-
 .guestbook-closed-sign small {
   display: block;
   margin-top: 5px;
@@ -623,14 +542,12 @@ p {
   font: 10px/1.7 "Share Tech Mono", monospace;
   letter-spacing: 0;
 }
-
 .gb-form {
   display: flex;
   flex-direction: column;
   gap: 8px;
   margin-bottom: 14px;
 }
-
 .gb-input {
   width: 100%;
   min-width: 0;
@@ -641,19 +558,15 @@ p {
   resize: vertical;
   font-size: 10px;
 }
-
 .gb-input::placeholder {
   color: #705866;
 }
-
 .gb-input:focus {
   outline: 1px solid #b22a49;
 }
-
 .gb-submit {
   align-self: center;
 }
-
 .gb-entries {
   display: flex;
   flex-direction: column;
@@ -662,7 +575,6 @@ p {
   overflow-y: auto;
   padding-right: 4px;
 }
-
 .gb-entry {
   padding: 9px 10px;
   color: #bba8b7;
@@ -672,11 +584,9 @@ p {
   line-height: 1.8;
   overflow-wrap: anywhere;
 }
-
 .gb-entry b {
   color: #dc3454;
 }
-
 .owner-badge {
   display: inline-block;
   margin-left: 5px;
@@ -687,14 +597,12 @@ p {
   font-size: 8px;
   vertical-align: middle;
 }
-
 .gb-entry .gb-time {
   display: block;
   margin-top: 4px;
   color: #776270;
   font-size: 9px;
 }
-
 .gb-reactions {
   display: flex;
   flex-wrap: wrap;
@@ -703,7 +611,6 @@ p {
   padding-top: 7px;
   border-top: 1px dashed #48202e;
 }
-
 .reaction-btn {
   min-width: 44px;
   padding: 5px 7px;
@@ -712,17 +619,14 @@ p {
   border: 1px solid #542034;
   font-size: 10px;
 }
-
 .reaction-btn.reacted {
   color: #ed4562;
   background: #310c1b;
   border-color: #a72645;
 }
-
 .reaction-btn:disabled {
   cursor: default;
 }
-
 .owner-login {
   display: block;
   margin: 10px auto 0;
@@ -733,18 +637,15 @@ p {
   font-size: 9px;
   text-decoration: underline;
 }
-
 .owner-login.logged-in {
   color: #b6a0b1;
 }
-
 .steam-games {
   display: flex;
   flex-direction: column;
   gap: 11px;
   margin-top: 14px;
 }
-
 .steam-game {
   display: block;
   overflow: hidden;
@@ -754,11 +655,9 @@ p {
   text-decoration: none;
   transition: transform .12s ease;
 }
-
 .steam-game:hover {
   transform: translateY(-2px);
 }
-
 .steam-game img {
   display: block;
   width: 100%;
@@ -769,34 +668,28 @@ p {
   filter: saturate(.65) brightness(.78);
   transition: filter .2s ease;
 }
-
 .steam-game:hover img {
   filter: saturate(1) brightness(1);
 }
-
 .steam-game-info {
   padding: 10px;
 }
-
 .steam-game-name {
   color: #d7bdcb;
   font-size: 10px;
   line-height: 1.6;
   overflow-wrap: anywhere;
 }
-
 .steam-game-time {
   margin-top: 5px;
   color: #907a89;
   font-size: 9px;
 }
-
 .steam-loading {
   padding: 12px;
   font-size: 10px;
   text-align: center;
 }
-
 .bunny-gallery {
   display: grid;
   grid-template-columns: 1fr;
@@ -804,7 +697,6 @@ p {
   gap: 12px;
   margin-top: 14px;
 }
-
 .bunny-gallery a {
   display: flex;
   min-width: 0;
@@ -816,7 +708,6 @@ p {
   border: 1px solid #572033;
   text-decoration: none;
 }
-
 .bunny-gallery img {
   display: block;
   width: 100%;
@@ -825,12 +716,10 @@ p {
   filter: saturate(.78) brightness(.88);
   transition: filter .2s ease, transform .3s ease;
 }
-
 .bunny-gallery a:hover img {
   filter: saturate(1) brightness(1);
   transform: scale(1.035);
 }
-
 .photo-lightbox {
   position: fixed;
   inset: 0;
@@ -845,12 +734,10 @@ p {
   visibility: hidden;
   transition: opacity .18s ease, visibility .18s ease;
 }
-
 .photo-lightbox.open {
   opacity: 1;
   visibility: visible;
 }
-
 .photo-lightbox img {
   display: block;
   max-width: min(92vw, 900px);
@@ -861,7 +748,6 @@ p {
   border: 1px solid #a82a49;
   box-shadow: 0 0 50px #9e123633;
 }
-
 .lightbox-close {
   position: fixed;
   top: 18px;
@@ -877,11 +763,9 @@ p {
   border: 1px solid #8e2340;
   font: 24px/1 system-ui;
 }
-
 body.lightbox-open {
   overflow: hidden;
 }
-
 .konami-overlay {
   position: fixed;
   inset: 0;
@@ -892,7 +776,6 @@ body.lightbox-open {
   background: #09050de8;
   backdrop-filter: blur(8px);
 }
-
 .konami-msg {
   max-width: 80vw;
   padding: 22px 26px;
@@ -903,12 +786,10 @@ body.lightbox-open {
   font: 12px/2 "Share Tech Mono", monospace;
   text-align: center;
 }
-
 .konami-msg b {
   color: #dc3152;
   font-family: "Cinzel", serif;
 }
-
 .sparkle {
   position: fixed;
   z-index: 9999;
@@ -918,14 +799,12 @@ body.lightbox-open {
   filter: drop-shadow(0 0 5px #d0003b);
   animation: sparkle-fade 700ms linear forwards;
 }
-
 @keyframes sparkle-fade {
   to {
     transform: translateY(-14px) scale(.4);
     opacity: 0;
   }
 }
-
 .float {
   position: fixed;
   z-index: 0;
@@ -938,12 +817,10 @@ body.lightbox-open {
   pointer-events: none;
   animation: drift 12s linear infinite;
 }
-
 @keyframes drift {
   from { transform: translateY(110vh) rotate(0deg); }
   to { transform: translateY(-20vh) rotate(360deg); }
 }
-
 @media (max-width: 1100px) {
   .page-stack {
     display: flex;
@@ -952,85 +829,67 @@ body.lightbox-open {
     width: min(92vw, 560px);
     gap: 22px;
   }
-
   .page-stack > * {
     width: 100%;
   }
-
   .page-stack .card {
     order: 1;
   }
-
   .page-stack .community-card {
     order: 2;
   }
-
   .page-stack .bunny-card {
     order: 3;
   }
-
   .page-stack .steam-card {
     display: none;
   }
-
   .bunny-gallery {
     grid-template-columns: repeat(3, minmax(0, 1fr));
     grid-template-rows: auto;
   }
-
   .bunny-gallery a {
     min-height: 100px;
   }
-
   .bunny-gallery img {
     height: auto;
   }
 }
-
 @media (max-width: 480px) {
   body {
     padding-top: 42px;
   }
-
   .page-stack {
     width: 92vw;
     margin-top: 20px;
   }
-
   .card {
     padding: 24px 16px 20px;
   }
-
   .discord-live {
     gap: 12px;
     padding: 12px;
   }
-
   .discord-avatar {
     width: 58px;
     height: 58px;
   }
-
   .discord-name {
     font-size: 12px;
   }
-
   .clock-widget {
     left: 8px;
     bottom: 8px;
     font-size: 9px;
   }
-
   .bunny-gallery {
     grid-template-columns: 1fr;
     grid-template-rows: auto;
   }
-
   .bunny-gallery a {
     min-height: 150px;
   }
 }
-
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: .01ms !important;
@@ -1039,36 +898,101 @@ body.lightbox-open {
     transition-duration: .01ms !important;
   }
 }
+
+/* Temporarily hide the broken public guestbook while keeping its DOM intact. */
+.guestbook-wrap { display: none !important; }
+
+/* Anonymous messages in the left community panel */
+.anonymous-message-box {
+  margin-top: 18px;
+  padding: 12px;
+  background: #0a080d;
+  border: 1px solid #542034;
+  border-left: 2px solid #a52242;
+  text-align: left;
+}
+.anonymous-message-box .section-title { text-align: left; margin-bottom: 7px; }
+.anonymous-message-box .anonymous-hint { margin: 0 0 10px; color: #96818f; font-size: 10px; }
+.anonymous-message-form { display: flex; flex-direction: column; gap: 8px; }
+.anonymous-message-form textarea { min-height: 95px; resize: vertical; }
+.anonymous-message-form button { align-self: stretch; padding: 9px 7px; font-size: 9px; }
+.anonymous-message-form button:disabled { opacity: .6; cursor: wait; transform: none; }
+#anonymous-message-status { min-height: 16px; margin: 0; color: #c52a49; font-size: 9px; }
+
+/* Keep the guestbook and anonymous messages as two independent sidebar cards. */
+.page-stack .community-column {
+  position: absolute;
+  top: 0;
+  left: calc(50% + 302px);
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.page-stack .community-column > .community-card {
+  position: relative;
+  inset: auto;
+  width: 100%;
+  margin: 0;
+}
+.page-stack .community-column > .anonymous-message-box {
+  width: 100%;
+  margin: 0;
+  padding: 18px;
+  background: linear-gradient(135deg, #ffffff04, transparent 40%), rgba(12, 9, 14, .97);
+  border: 1px solid #502032;
+  border-radius: 2px;
+  box-shadow: 0 0 0 4px #08060a, 0 0 0 5px #28111b, 0 14px 40px #000b, 0 0 30px #750e2418;
+}
+.page-stack .community-column > .anonymous-message-box .section-title {
+  padding-bottom: 12px;
+  border-bottom: 1px solid #42202d;
+  color: #c12b4b;
+  font: 600 10px/1.8 "Cinzel", serif;
+  letter-spacing: 1.5px;
+  text-align: center;
+}
+@media (max-width: 1100px) {
+  .page-stack .community-column {
+    position: static;
+    inset: auto;
+    width: 100%;
+    order: 2;
+    margin: 0;
+  }
+  .page-stack .community-column > .community-card,
+  .page-stack .community-column > .anonymous-message-box {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    margin: 0;
+  }
+}
 </style>
 </head>
-
 <body>
 <div class="marquee-banner">
   <div class="marquee-track">SITE UNDER CONSTRUCTION / MORE UPDATES COMING SOON / WELCOME TO MY CORNER OF THE INTERNET / SITE UNDER CONSTRUCTION / MORE UPDATES COMING SOON /&nbsp;</div>
 </div>
-
 <div id="clock-widget" class="clock-widget">--:--:--</div>
-
 <div class="float" style="left:8%;animation-delay:0s">✝</div>
 <div class="float" style="left:28%;animation-delay:2.5s">✦</div>
 <div class="float" style="left:50%;animation-delay:5s">†</div>
 <div class="float" style="left:70%;animation-delay:1s">✧</div>
 <div class="float" style="left:88%;animation-delay:3.5s">✝</div>
-
 <div class="page-stack">
+  <div class="community-column">
   <section class="community-card">
     <div class="section-title">Visitor statistics</div>
     <div class="counter-wrap">
       <div class="counter-label">TOTAL VISITORS</div>
       <div class="counter-digits" id="visit-counter">000000</div>
     </div>
-
     <div class="guestbook-wrap">
       <div class="guestbook-closed-sign">
         TEMPORARILY CLOSED
         <small>The guestbook is unavailable while backend issues are being resolved.</small>
       </div>
-
       <div class="guestbook">
         <div class="section-title">Guestbook</div>
         <form id="gb-form" class="gb-form">
@@ -1080,8 +1004,21 @@ body.lightbox-open {
         <button id="owner-login" class="owner-login" type="button">Owner login</button>
       </div>
     </div>
+
+
   </section>
 
+  <section class="anonymous-message-box" aria-labelledby="anonymous-message-title">
+    <div class="section-title" id="anonymous-message-title">Send a message anonymously</div>
+    <p class="anonymous-hint">leave me a secret. only i can read submissions.</p>
+    <form id="anonymous-message-form" class="anonymous-message-form">
+      <textarea id="anonymous-message" class="gb-input" rows="4" maxlength="1000" placeholder="type into the void..." aria-label="Anonymous message" required></textarea>
+      <button class="btn" type="submit">Send into the void</button>
+      <p id="anonymous-message-status" role="status" aria-live="polite"></p>
+    </form>
+  </section>
+
+  </div>
   <main class="card">
     <div class="windowbar">
       <div class="dots">
@@ -1090,14 +1027,11 @@ body.lightbox-open {
         <span class="dot"></span>
       </div>
     </div>
-
     <div class="mascot">PERSONAL ARCHIVE</div>
     <h1 id="typewriter"><span id="tw-text"></span><span class="tw-cursor">_</span></h1>
-
     <div class="dni">
       <b>BOUNDARIES /</b> basic DNI criteria, boundary breakers, yumeshippers, 20+ y.o.
     </div>
-
     <section class="about-me">
       <div class="section-title">About me</div>
       <p id="about-cycle" class="about-cycle">Im pretty</p>
@@ -1108,7 +1042,6 @@ body.lightbox-open {
         <a class="band-link" href="https://open.spotify.com/artist/428Jnte7ijQ5BCSXQoxpmO?si=6d32fc1eb99d47e9" target="_blank" rel="noopener noreferrer">foxtails ↗</a>
       </div>
     </section>
-
     <section class="discord-live" id="discord-live" aria-live="polite">
       <div class="discord-avatar-wrap">
         <img id="discord-avatar" class="discord-avatar" src="discord.png" alt="Discord avatar">
@@ -1121,10 +1054,8 @@ body.lightbox-open {
         <div id="discord-now-playing" class="discord-now-playing"></div>
       </div>
     </section>
-
     <div class="footer">Best viewed on a desktop / 2026</div>
   </main>
-
   <section class="bunny-card">
     <div class="section-title">Mochi / Gallery</div>
     <div class="bunny-gallery">
@@ -1139,7 +1070,6 @@ body.lightbox-open {
       </a>
     </div>
   </section>
-
   <section class="steam-card" hidden data-disabled="true">
     <div class="section-title">Recently played</div>
     <div id="steam-games" class="steam-games">
@@ -1147,18 +1077,15 @@ body.lightbox-open {
     </div>
   </section>
 </div>
-
 <div id="photo-lightbox" class="photo-lightbox" role="dialog" aria-modal="true" aria-label="Mochi photo" aria-hidden="true">
   <button id="lightbox-close" class="lightbox-close" type="button" aria-label="Close photo">×</button>
   <img id="lightbox-image" src="" alt="">
 </div>
-
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 const photoLightbox = document.getElementById("photo-lightbox");
 const lightboxImage = document.getElementById("lightbox-image");
 const lightboxClose = document.getElementById("lightbox-close");
-
 function openPhotoLightbox(image) {
   if (!photoLightbox || !lightboxImage) return;
   lightboxImage.src = image.src;
@@ -1168,7 +1095,6 @@ function openPhotoLightbox(image) {
   document.body.classList.add("lightbox-open");
   lightboxClose?.focus();
 }
-
 function closePhotoLightbox() {
   if (!photoLightbox || !lightboxImage) return;
   photoLightbox.classList.remove("open");
@@ -1176,7 +1102,6 @@ function closePhotoLightbox() {
   document.body.classList.remove("lightbox-open");
   lightboxImage.src = "";
 }
-
 document.querySelectorAll(".bunny-gallery a").forEach(link => {
   link.addEventListener("click", event => {
     event.preventDefault();
@@ -1184,36 +1109,28 @@ document.querySelectorAll(".bunny-gallery a").forEach(link => {
     if (image) openPhotoLightbox(image);
   });
 });
-
 lightboxClose?.addEventListener("click", closePhotoLightbox);
-
 photoLightbox?.addEventListener("click", event => {
   if (event.target === photoLightbox) closePhotoLightbox();
 });
-
 document.addEventListener("keydown", event => {
   if (event.key === "Escape" && photoLightbox?.classList.contains("open")) {
     closePhotoLightbox();
   }
 });
-
 const aboutLines = [
   "Im pretty tuff",
   "Feel free to dm me!",
   "Usually listening to music"
 ];
-
 const aboutCycle = document.getElementById("about-cycle");
-
 if (aboutCycle) {
   aboutCycle.textContent = aboutLines[Math.floor(Math.random() * aboutLines.length)];
 }
-
 const SUPABASE_URL = "https://jyjvqbpnpnbxrkprrgli.supabase.co";
 const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_xdSbkUjSGPnEgUdSh7GM5g_1xqEDmAg";
 const SUPABASE_FUNCTIONS_URL = `${SUPABASE_URL}/functions/v1`;
 const STEAM_FUNCTION_URL = `${SUPABASE_FUNCTIONS_URL}/steam-recent`;
-
 const HTML_ENTITIES = {
   "&": "&amp;",
   "<": "&lt;",
@@ -1221,30 +1138,24 @@ const HTML_ENTITIES = {
   '"': "&quot;",
   "'": "&#039;"
 };
-
 function escapeHtml(value) {
   return String(value ?? "").replace(/[&<>"']/g, character => HTML_ENTITIES[character]);
 }
-
 function formatSteamMinutes(minutes) {
   const hours = Number(minutes || 0) / 60;
   return hours < 10 ? hours.toFixed(1) : Math.round(hours).toString();
 }
-
 async function loadSteamGames() {
   const container = document.getElementById("steam-games");
   if (!container || container.closest(".steam-card")?.hidden) return;
-
   try {
     const response = await fetch(STEAM_FUNCTION_URL, { cache: "no-store" });
     const payload = await response.json();
     if (!response.ok) throw new Error(payload.error || "Steam request failed");
-
     if (!payload.games?.length) {
       container.innerHTML = '<div class="steam-loading">No recent games found.</div>';
       return;
     }
-
     container.innerHTML = payload.games.map(game => `
       <a class="steam-game" href="${game.url}" target="_blank" rel="noopener noreferrer">
         <img src="${game.artwork}" alt="" loading="lazy">
@@ -1259,9 +1170,7 @@ async function loadSteamGames() {
     console.error("Steam games error:", error);
   }
 }
-
 loadSteamGames();
-
 const DISCORD_USER_ID = "680091835204763718";
 const discordNameEl = document.getElementById("discord-name");
 const discordUsernameEl = document.getElementById("discord-username");
@@ -1269,7 +1178,6 @@ const discordAvatarEl = document.getElementById("discord-avatar");
 const discordStatusEl = document.getElementById("discord-status-dot");
 const discordCustomEl = document.getElementById("discord-custom-status");
 const discordPlayingEl = document.getElementById("discord-now-playing");
-
 const hasDiscordElements = [
   discordNameEl,
   discordUsernameEl,
@@ -1278,44 +1186,33 @@ const hasDiscordElements = [
   discordCustomEl,
   discordPlayingEl
 ].every(Boolean);
-
 let discordRequestPending = false;
-
 function discordAvatarUrl(user) {
   if (!user || !user.avatar) {
     const fallback = Number(BigInt(user?.id || "0") >> 22n) % 6;
     return `https://cdn.discordapp.com/embed/avatars/${fallback}.png`;
   }
-
   const ext = user.avatar.startsWith("a_") ? "gif" : "png";
   return `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.${ext}?size=256`;
 }
-
 async function loadDiscordPresence() {
   if (!hasDiscordElements || discordRequestPending) return;
   discordRequestPending = true;
-
   try {
     const response = await fetch(`https://api.lanyard.rest/v1/users/${DISCORD_USER_ID}`, { cache: "no-store" });
     const payload = await response.json();
-
     if (!response.ok || !payload.success) {
       throw new Error("Discord presence unavailable");
     }
-
     const data = payload.data;
     const user = data.discord_user;
-
     discordNameEl.textContent = user.global_name || user.display_name || user.username;
     discordUsernameEl.textContent = `@${user.username}`;
     discordAvatarEl.src = discordAvatarUrl(user);
-
     discordStatusEl.className = `discord-status-dot status-${data.discord_status || "offline"}`;
     discordStatusEl.title = data.discord_status || "offline";
-
     const custom = (data.activities || []).find(activity => activity.type === 4);
     discordCustomEl.textContent = custom?.state || data.discord_status || "offline";
-
     if (data.listening_to_spotify && data.spotify) {
       discordPlayingEl.textContent = `♫ ${data.spotify.song} — ${data.spotify.artist}`;
     } else {
@@ -1332,21 +1229,16 @@ async function loadDiscordPresence() {
     discordRequestPending = false;
   }
 }
-
 if (hasDiscordElements) {
   loadDiscordPresence();
-
   setInterval(() => {
     if (!document.hidden) loadDiscordPresence();
   }, 30000);
-
   document.addEventListener("visibilitychange", () => {
     if (!document.hidden) loadDiscordPresence();
   });
 }
-
 const clock = document.getElementById("clock-widget");
-
 if (clock) {
   function updateClock() {
     const now = new Date();
@@ -1355,27 +1247,21 @@ if (clock) {
     const s = String(now.getSeconds()).padStart(2, "0");
     clock.textContent = `${h}:${m}:${s}`;
   }
-
   updateClock();
   setInterval(updateClock, 1000);
 }
-
 const titleText = "hi lol";
 const twText = document.getElementById("tw-text");
-
 if (twText) {
   let typeIndex = 0;
-
   function typeWriter() {
     if (typeIndex < titleText.length) {
       twText.textContent += titleText[typeIndex++];
       setTimeout(typeWriter, 100);
     }
   }
-
   typeWriter();
 }
-
 const konami = [
   "ArrowUp", "ArrowUp",
   "ArrowDown", "ArrowDown",
@@ -1383,13 +1269,10 @@ const konami = [
   "ArrowLeft", "ArrowRight",
   "b", "a"
 ];
-
 let konamiIndex = 0;
-
 document.addEventListener("keydown", event => {
   if (event.key === konami[konamiIndex]) {
     konamiIndex++;
-
     if (konamiIndex === konami.length) {
       activateKonami();
       konamiIndex = 0;
@@ -1398,11 +1281,9 @@ document.addEventListener("keydown", event => {
     konamiIndex = event.key === konami[0] ? 1 : 0;
   }
 });
-
 function activateKonami() {
   const overlay = document.createElement("div");
   overlay.className = "konami-overlay";
-
   const msg = document.createElement("div");
   msg.className = "konami-msg";
   msg.innerHTML = `
@@ -1410,12 +1291,9 @@ function activateKonami() {
     <b>SECRET SEQUENCE ACTIVATED</b><br>
     You found the hidden easter egg.
   `;
-
   overlay.appendChild(msg);
   document.body.appendChild(overlay);
-
   const symbols = ["✝", "†", "✦", "✧", "☠"];
-
   for (let i = 0; i < 25; i++) {
     const symbol = document.createElement("div");
     symbol.className = "float";
@@ -1427,25 +1305,19 @@ function activateKonami() {
     document.body.appendChild(symbol);
     setTimeout(() => symbol.remove(), 6500);
   }
-
   setTimeout(() => overlay.remove(), 3000);
 }
-
 document.addEventListener("click", event => {
   if (event.target.closest("button, a, input, textarea")) return;
-
   const sparkle = document.createElement("div");
   sparkle.className = "sparkle";
   sparkle.textContent = "✦";
   sparkle.style.left = event.clientX + "px";
   sparkle.style.top = event.clientY + "px";
-
   sparkle.addEventListener("animationend", () => sparkle.remove(), { once: true });
   document.body.appendChild(sparkle);
 });
-
 const floatSymbols = ["✝", "†", "✧", "✦", "☠", "⋆"];
-
 for (let i = 0; i < 8; i++) {
   const element = document.createElement("div");
   element.className = "float";
@@ -1455,54 +1327,71 @@ for (let i = 0; i < 8; i++) {
   element.style.animationDuration = (8 + Math.random() * 8) + "s";
   document.body.appendChild(element);
 }
-
 (async function () {
   try {
     if (!window.supabase) throw new Error("Supabase failed to load");
-
     const supabaseClient = window.supabase.createClient(
       SUPABASE_URL,
       SUPABASE_PUBLISHABLE_KEY
     );
 
-    const counterEl = document.getElementById("visit-counter");
+  const anonymousMessageForm = document.getElementById("anonymous-message-form");
+  const anonymousMessageInput = document.getElementById("anonymous-message");
+  const anonymousMessageStatus = document.getElementById("anonymous-message-status");
 
+  anonymousMessageForm?.addEventListener("submit", async event => {
+    event.preventDefault();
+    const message = anonymousMessageInput.value.trim();
+    if (!message) {
+      anonymousMessageStatus.textContent = "write a message first.";
+      return;
+    }
+
+    const submitButton = anonymousMessageForm.querySelector('button[type="submit"]');
+    submitButton.disabled = true;
+    anonymousMessageStatus.textContent = "sending...";
+
+    try {
+      const { error } = await supabaseClient
+        .from("anonymous_messages")
+        .insert([{ message }]);
+      if (error) throw error;
+      anonymousMessageForm.reset();
+      anonymousMessageStatus.textContent = "message sent into the void.";
+    } catch (error) {
+      console.error("Anonymous message submission failed:", error);
+      anonymousMessageStatus.textContent = "couldn't send it. try again later.";
+    } finally {
+      submitButton.disabled = false;
+    }
+  });
+    const counterEl = document.getElementById("visit-counter");
     async function handleVisitorCounter() {
       if (!counterEl) return;
-
       try {
         const alreadyVisited = localStorage.getItem("hasVisited");
-
         const { data, error } = await supabaseClient
           .from("visitors")
           .select("count")
           .eq("id", 1)
           .single();
-
         if (error) throw error;
-
         let currentCount = data?.count || 0;
-
         if (!alreadyVisited) {
           currentCount++;
-
           const { error: updateErr } = await supabaseClient
             .from("visitors")
             .update({ count: currentCount })
             .eq("id", 1);
-
           if (updateErr) throw updateErr;
           localStorage.setItem("hasVisited", "true");
         }
-
         counterEl.textContent = String(currentCount).padStart(6, "0");
       } catch (error) {
         console.error("Counter error:", error);
       }
     }
-
     await handleVisitorCounter();
-
     const form = document.getElementById("gb-form");
     const nameEl = document.getElementById("gb-name");
     const msgEl = document.getElementById("gb-msg");
@@ -1511,25 +1400,20 @@ for (let i = 0; i < 8; i++) {
     const OWNER_FUNCTION_URL = `${SUPABASE_FUNCTIONS_URL}/guestbook-owner`;
     const GUESTBOOK_MESSAGE_LIMIT = 100;
     let ownerKey = localStorage.getItem("guestbookOwnerKey") || "";
-
     if (!form || !nameEl || !msgEl || !list) return;
-
     function updateOwnerLogin() {
       if (!ownerLogin) return;
       ownerLogin.textContent = ownerKey ? "Owner mode active" : "Owner login";
       ownerLogin.classList.toggle("logged-in", Boolean(ownerKey));
     }
-
     async function verifyOwnerKey(key) {
       const response = await fetch(OWNER_FUNCTION_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ action: "verify", ownerKey: key })
       });
-
       return response.ok;
     }
-
     ownerLogin?.addEventListener("click", async () => {
       if (ownerKey) {
         if (confirm("Log out of owner mode?")) {
@@ -1539,45 +1423,36 @@ for (let i = 0; i < 8; i++) {
         }
         return;
       }
-
       const enteredKey = prompt("Enter owner code:");
       if (!enteredKey) return;
-
       ownerLogin.disabled = true;
       const valid = await verifyOwnerKey(enteredKey).catch(() => false);
       ownerLogin.disabled = false;
-
       if (!valid) {
         alert("Incorrect owner code.");
         return;
       }
-
       ownerKey = enteredKey;
       localStorage.setItem("guestbookOwnerKey", ownerKey);
       updateOwnerLogin();
       alert("Owner mode enabled.");
     });
-
     updateOwnerLogin();
-
     async function loadMessages() {
       const { data, error } = await supabaseClient
         .from("guestbook")
         .select("id,name,message,created_at,is_owner")
         .order("created_at", { ascending: false })
         .limit(GUESTBOOK_MESSAGE_LIMIT);
-
       if (error) {
         console.error("Guestbook load error:", error);
         list.innerHTML = '<div class="gb-entry">Unable to load messages.</div>';
         return;
       }
-
       if (!data || data.length === 0) {
         list.innerHTML = '<div class="gb-entry">No messages yet.</div>';
         return;
       }
-
       list.innerHTML = data.map(entry => `
         <div class="gb-entry">
           <b>${escapeHtml(entry.name)}</b>${entry.is_owner ? '<span class="owner-badge">OWNER</span>' : ""}:
@@ -1590,64 +1465,48 @@ for (let i = 0; i < 8; i++) {
           </div>
         </div>
       `).join("");
-
       await loadReactions(data.map(entry => entry.id));
     }
-
     let guestbookVisitorId = localStorage.getItem("guestbookVisitorId");
-
     if (!guestbookVisitorId) {
       guestbookVisitorId = crypto.randomUUID();
       localStorage.setItem("guestbookVisitorId", guestbookVisitorId);
     }
-
     async function loadReactions(entryIds) {
       if (!entryIds.length) return;
-
       const { data, error } = await supabaseClient
         .from("guestbook_reactions")
         .select("entry_id,reaction")
         .in("entry_id", entryIds);
-
       if (error) {
         console.error("Reaction load error:", error);
         return;
       }
-
       const counts = {};
-
       (data || []).forEach(row => {
         const key = `${row.entry_id}:${row.reaction}`;
         counts[key] = (counts[key] || 0) + 1;
       });
-
       list.querySelectorAll(".reaction-btn").forEach(button => {
         const entryId = button.closest(".gb-reactions").dataset.entryId;
         const reaction = button.dataset.reaction;
         const key = `${entryId}:${reaction}`;
-
         button.querySelector("span").textContent = counts[key] || 0;
-
         if (localStorage.getItem(`gbReacted:${key}`) === "true") {
           button.classList.add("reacted");
           button.disabled = true;
         }
       });
     }
-
     list.addEventListener("click", async event => {
       const button = event.target.closest(".reaction-btn");
       if (!button || button.disabled) return;
-
       const reactionContainer = button.closest(".gb-reactions");
       if (!reactionContainer) return;
-
       const entryId = Number(reactionContainer.dataset.entryId);
       const reaction = button.dataset.reaction;
       const key = `${entryId}:${reaction}`;
-
       button.disabled = true;
-
       const { error } = await supabaseClient
         .from("guestbook_reactions")
         .insert([{
@@ -1655,22 +1514,18 @@ for (let i = 0; i < 8; i++) {
           visitor_id: guestbookVisitorId,
           reaction
         }]);
-
       if (error && error.code !== "23505") {
         console.error("Reaction error:", error);
         button.disabled = false;
         return;
       }
-
       if (!error) {
         const countEl = button.querySelector("span");
         countEl.textContent = String(Number(countEl.textContent) + 1);
       }
-
       localStorage.setItem(`gbReacted:${key}`, "true");
       button.classList.add("reacted");
     });
-
     const blockedPatterns = [
       "nigg", "coon", "spic", "wetback", "chink", "gook", "kike",
       "paki", "raghead", "fag", "dyke", "tranny", "shemale", "homo",
@@ -1678,32 +1533,24 @@ for (let i = 0; i < 8; i++) {
       "honky", "beaner", "jap", "kraut", "redskin", "abo", "wop",
       "dago", "polack"
     ];
-
     function containsBlockedWord(value) {
       const normalized = value
         .toLowerCase()
         .normalize("NFKD")
         .replace(/[\u0300-\u036f]/g, "")
         .replace(/[^a-z0-9]/g, "");
-
       return blockedPatterns.some(pattern => normalized.includes(pattern));
     }
-
     form.addEventListener("submit", async event => {
       event.preventDefault();
-
       const name = nameEl.value.trim();
       const message = msgEl.value.trim();
-
       if (!name || !message) return;
-
       if (containsBlockedWord(name) || containsBlockedWord(message)) {
         alert("Please keep the guestbook respectful.");
         return;
       }
-
       let postError = null;
-
       if (ownerKey) {
         try {
           const response = await fetch(OWNER_FUNCTION_URL, {
@@ -1711,7 +1558,6 @@ for (let i = 0; i < 8; i++) {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ ownerKey, name, message })
           });
-
           if (!response.ok) {
             const result = await response.json().catch(() => ({}));
             throw new Error(result.error || "Owner post failed");
@@ -1723,22 +1569,17 @@ for (let i = 0; i < 8; i++) {
         const { error } = await supabaseClient
           .from("guestbook")
           .insert([{ name, message }]);
-
         postError = error;
       }
-
       if (postError) {
         console.error("Guestbook insert error:", postError);
         alert("Unable to submit the message.");
         return;
       }
-
       form.reset();
       await loadMessages();
     });
-
     await loadMessages();
-
   } catch (error) {
     console.error("Guestbook/counter initialization failed:", error);
     const list = document.getElementById("gb-entries");
@@ -1750,3 +1591,4 @@ for (let i = 0; i < 8; i++) {
 </script>
 </body>
 </html>
+  --panel2: #0a080d;
